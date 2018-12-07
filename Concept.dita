@@ -2,8 +2,190 @@
 <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
 <concept id="concept_myc_d3b_1gb">
     <title>Test</title>
-    <shortdesc></shortdesc>
     <conbody>
-        <p>HELP</p>
+        <section id="section_cjz_zdy_1gb">
+            <title>SQL Reference for SAP Vora in SAP Data Hub</title>
+            <p>The SAP Vora SQL Reference describes all SQL data types, predicates, operators,
+                expressions, functions, statements, error codes, and system views.</p>
+            <p>To use the search function for specific SQL statements, functions or operators, see
+                the “customer documentation” guide on <xref
+                    href="https://help.sap.com/viewer/DRAFT/98fe4b43ad664cba874e0fc7ea8ecc76/2.4.0/en-US"
+                    format="html" scope="external">SAP Help Portal</xref>.</p>
+            <p>SAP Vora SQL is aligned with the SQL used by SAP HANA, so the SAP HANA SQL Reference
+                is an additional valuable source of information. In general, SAP Vora SQL is a
+                subset of SAP HANA SQL - the cases where Vora SQL differs from HANA SQL are pointed
+                out explicitly. Also note that the public interface is aligned with the SQL 2011
+                standard.</p>
+        </section>
+        <section id="section_djz_zdy_1gb">
+            <title>Notation</title>
+            <p>This reference uses BNF (Backus-Naur Form), a notation technique used to define
+                programming languages. BNF describes the syntax of a grammar using a set of
+                production rules and a set of symbols.</p>
+            <p>The following BNF items are used in this guide:</p>
+            <table id="table_ejz_zdy_1gb">
+                <tgroup cols="3">
+                    <colspec colnum="1" colname="col1"/>
+                    <colspec colnum="2" colname="col2"/>
+                    <colspec colnum="3" colname="col3"/>
+                    <thead>
+                        <row>
+                            <entry>Symbol</entry>
+                            <entry>Meaning</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>::=</entry>
+                            <entry>Definition, left side is defined by right side</entry>
+                        </row>
+                        <row>
+                            <entry/>
+                            <entry/>
+                            <entry>OR operator</entry>
+                        </row>
+                        <row>
+                            <entry>( … )</entry>
+                            <entry>Grouped tokens</entry>
+                        </row>
+                        <row>
+                            <entry>{ … }</entry>
+                            <entry>Zero or more repetitions</entry>
+                        </row>
+                        <row>
+                            <entry>[ … ]</entry>
+                            <entry>Zero or one repetition</entry>
+                        </row>
+                        <row>
+                            <entry>‘…’</entry>
+                            <entry>Literal final token</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </section>
+        <section id="section_njz_zdy_1gb">
+            <title>Introduction to SQL</title>
+            <p>This section describes the SAP Vora database implementation of Structured Query
+                Language (SQL).</p>
+        </section>
+        <section id="section_rjz_zdy_1gb">
+            <title>Supported Languages and Code Pages</title>
+            <p>The SAP Vora database supports Unicode to allow the use of all languages in the
+                Unicode Standard and 7 Bit ASCII code page without restriction.</p>
+        </section>
+        <section id="section_sjz_zdy_1gb">
+            <title>Comments</title>
+            <p>You can add comments to improve the readability and maintainability of your SQL
+                statements. Comments are delimited in SQL statements as follows:</p>
+            <ul id="ul_tjz_zdy_1gb">
+                <li>
+                    <p>Double hyphens “—“. Everything after the double hyphen until the end of a
+                        line is ignored by the SQL parser.</p>
+                </li>
+                <li>
+                    <p>“/*“ and “*/“. This style of commenting is used to place comments on multiple
+                        lines. All text between the opening “/*“ and closing “*/“ is ignored by the
+                        SQL parser.</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_ujz_zdy_1gb">
+            <title>Identifiers</title>
+            <p>Identifiers are used to represent names used in SQL statement including table name,
+                view name, synonym name, column name, index name, function name, procedure name,
+                user name, role name, and so on. There are two kinds of identifiers, undelimited
+                identifiers and delimited identifiers:</p>
+            <ul id="ul_vjz_zdy_1gb">
+                <li>
+                    <p>Undelimited table and column names must start with a letter and cannot
+                        contain any symbols other than digits or an underscore “_“.</p>
+                </li>
+                <li>
+                    <p>Delimited identifiers are enclosed in the delimiter, double quotes. The
+                        identifier can then contain any character including special characters.
+                        “AB$%CD” is a valid identifier name for example.</p>
+                </li>
+                <li>
+                    <p>Limitations:</p>
+                </li>
+                <li>
+                    <p>Undelimited identifiers must not be equal to any reserved keywords. Using
+                        delimiters is a safe way to avoid conflicts with reserved keywords.</p>
+                </li>
+                <li>
+                    <p>“_SYS_“ is reserved exclusively for the database engine and is therefore not
+                        allowed at the beginning of schema object names.</p>
+                </li>
+                <li>
+                    <p>The maximum length for identifiers is 127 characters.</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_zjz_zdy_1gb">
+            <title>Identifiers and Case Sensitivity</title>
+            <p>Identifiers without double-quotes in SQL syntax are converted to upper case when
+                processed by the server. For example, the statement <codeph>CREATE COLUMN TABLE
+                    MyTAB..</codeph> creates a table called MYTAB, whereas <codeph>CREATE COLUMN
+                    TABLE "MyTab"</codeph> creates a table called MyTab—and both tables can co-exist
+                in the database.</p>
+            <p>Specifying identifiers without double-quotes is allowed but can cause ambiguity later
+                when querying or performing operations on objects where casing in the identifier
+                name is significant. A recommendation is to standardize to using double-quotes
+                around all identifiers in SQL statements where ambiguity may be a concern.</p>
+        </section>
+        <section id="section_akz_zdy_1gb">
+            <title>Quotation Marks</title>
+            <p>Single quotation marks (<codeph>'</codeph>) are used to delimit string literals. A
+                single quotation mark itself can be represented using two single quotation marks
+                    (<codeph>''</codeph>). Double quotation marks are used to delimit identifiers. A
+                double quotation mark itself can be represented using two double quotation
+                marks.</p>
+        </section>
+        <section id="section_bkz_zdy_1gb">
+            <title>Data Types</title>
+            <p>A data type defines the characteristics of a data value. A special value of NULL is
+                included in every data type to indicate the absence of a value.</p>
+        </section>
+        <section id="section_ckz_zdy_1gb">
+            <title>Classification of Data Types</title>
+            <p>In the SAP Vora database, each data type can be classified by its characteristics as
+                shown below.</p>
+            <table id="table_dkz_zdy_1gb">
+                <tgroup cols="2">
+                    <colspec colnum="1" colname="col1"/>
+                    <colspec colnum="2" colname="col2"/>
+                    <thead>
+                        <row>
+                            <entry>Classification</entry>
+                            <entry>Data Type</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>Boolean</entry>
+                            <entry>BOOLEAN</entry>
+                        </row>
+                        <row>
+                            <entry>Character</entry>
+                            <entry>VARCHAR, CHAR</entry>
+                        </row>
+                        <row>
+                            <entry>Other</entry>
+                            <entry>NODE</entry>
+                        </row>
+                        <row>
+                            <entry>Datetime</entry>
+                            <entry>DATE, TIME, TIMESTAMP, INTERVAL</entry>
+                        </row>
+                        <row>
+                            <entry>Numeric</entry>
+                            <entry>TINYINT, SMALLINT, INTEGER, BIGINT, DECIMAL, REAL, DOUBLE</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <p>````</p>
+        </section>
     </conbody>
 </concept>
