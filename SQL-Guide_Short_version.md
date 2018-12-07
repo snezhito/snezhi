@@ -7,7 +7,7 @@ To use the search function for specific SQL statements, functions or operators, 
 
 ***
 
-SAP Vora SQL is aligned with the SQL used by SAP HANA, so the SAP HANA SQL Reference is an additional valuable source of information. In general, SAP Vora SQL is a subset of SAP HANA SQL - the cases where Vora SQL differs from HANA SQL are pointed out explicitly. Also note that the public interface is aligned with the SQL 2011 standard.
+SAP Vora SQL is aligned with the SQL used by SAP HANA, so the SAP HANA SQL Reference is an additional valuable source of information. In general, SAP Vora SQL is a subset of SAP HANA SQL - the cases where Vora SQL differs from HANA SQL are pointed out explicitly. Also note that the public interface is aligned with the SQL 2011 standard. Test stetlasdjfdsf
 
 <!-- loio36219daa81914ec286bf27d8ca4bdfe6 -->
 
