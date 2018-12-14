@@ -1,9 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
 <concept id="concept_tjj_jx5_cgb">
-    <title></title>
+    <title>Component Overview</title>
     <shortdesc></shortdesc>
     <conbody>
         <p></p>
+        <p>The main components used in SAP Vora are described briefly in the table below.</p>
+        <table id="table_gtf_kx5_cgb">
+            <tgroup cols="2">
+                <colspec colnum="1" colname="col1"/>
+                <colspec colnum="2" colname="col2"/>
+                <thead>
+                    <row>
+                        <entry>Component</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>Vora Tools</entry>
+                        <entry>An SQL editor, data browser, and view modeling environment.</entry>
+                    </row>
+                    <row>
+                        <entry>Spark Thrift Server</entry>
+                        <entry>The Hive/Thrift Query Server handles incoming JDBC requests for Spark
+                            SQL queries. It is in charge of creating and handling the Spark session
+                            required to run Spark SQL queries.</entry>
+                    </row>
+                    <row>
+                        <entry>SAP Vora Spark Extension</entry>
+                        <entry>The SAP Vora Spark extension implements the Spark data source API to
+                            enable access to SAP HANA and SAP Vora tables and views through Spark
+                            SQL. The SAP Vora Spark extension communicates with the transaction
+                            coordinator or SAP HANA to execute queries on data stored in SAP HANA or
+                            the various SAP Vora engines.</entry>
+                    </row>
+                    <row>
+                        <entry>Transaction Coordinator</entry>
+                        <entry>The transaction coordinator controls the execution of queries on the
+                            graph, disk, document, and time series engines on behalf of the SAP Vora
+                            Spark extension.</entry>
+                    </row>
+                    <row>
+                        <entry>Catalog Server</entry>
+                        <entry>The SAP Vora catalog provides a distributed metadata store. It stores
+                            changes to the metadata in the DLog Server. The catalog keeps metadata
+                            about the database objects (tables, time series, graphs, document
+                            collections) stored in the various SAP Vora engines.</entry>
+                    </row>
+                    <row>
+                        <entry>Landscape Manager</entry>
+                        <entry>The landscape manager controls data partitioning and placement across
+                            database engines.</entry>
+                    </row>
+                    <row>
+                        <entry>Transaction Broker</entry>
+                        <entry>The transaction broker provides a read-write lock mechanism for DDL
+                            statements. This ensures that both the catalog and instances of the
+                            query engine keep a consistent state at all times.</entry>
+                    </row>
+                    <row>
+                        <entry>Discovery Service</entry>
+                        <entry>The Discovery Service manages the service endpoints in the cluster.
+                            These include the SAP Vora catalog, SAP Vora engines, DLog, and others.
+                            It runs health checks on all registered services at pre-defined
+                            intervals.</entry>
+                    </row>
+                    <row>
+                        <entry>Cluster Manager/Kubernetes Dashboard</entry>
+                        <entry>The Kubernetes dashboard is used to run all SAP Vora services on a
+                            cluster of compute nodes. It allows you to deploy, maintain, and monitor
+                            the SAP Vora services.</entry>
+                    </row>
+                    <row>
+                        <entry>DLog (Distributed Log)</entry>
+                        <entry>The distributed log manager provides metadata persistence for the SAP
+                            Vora catalog.</entry>
+                    </row>
+                    <row>
+                        <entry>SAP Vora Engines</entry>
+                        <entry>The SAP Vora engines provide specialized storage and processing
+                            capabilities for relational, graph, time series, and document data. The
+                            engines communicate with each other during data partitioning and query
+                            processing.</entry>
+                    </row>
+                    <row>
+                        <entry>HDFS</entry>
+                        <entry>The Hadoop Distributed File System is a virtualized file system with
+                            replication and block-wise storage.</entry>
+                    </row>
+                    <row>
+                        <entry>S3</entry>
+                        <entry>The Amazon Simple Storage Service provides an object store, from
+                            which the SAP Vora engines can read data.</entry>
+                    </row>
+                    <row>
+                        <entry>ADL</entry>
+                        <entry>The Azure Data Lake Storage (ADL) provides a cloud storage service
+                            with an HDFS API.</entry>
+                    </row>
+                    <row>
+                        <entry>WASB</entry>
+                        <entry>The Windows Azure Storage Block (WASB) infrastructure is a HDFS-based
+                            cloud store.</entry>
+                    </row>
+                    <row>
+                        <entry>GCS</entry>
+                        <entry>GCS is the Google Cloud Store.</entry>
+                    </row>
+                    <row>
+                        <entry>Node Storage/Local FS</entry>
+                        <entry>The local file system attached to the Kubernetes pods. It is used by
+                            the relational disk engine and DLog to store (cached) data.</entry>
+                    </row>
+                    <row>
+                        <entry>HANA SDA</entry>
+                        <entry>SAP HANA Smart Data Access. An SAP HANA query federation technology
+                            that can be configured to federate queries across SAP HANA and SAP
+                            Vora.</entry>
+                    </row>
+                    <row>
+                        <entry>Spark Clients (Livy, Thrift Server, Spark Shell)</entry>
+                        <entry>Spark clients that run Spark applications using Spark submit. Spark
+                            clients can be configured to use the SAP Vora Spark extension for
+                            communication with SAP Vora.</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
     </conbody>
 </concept>
