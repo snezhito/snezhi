@@ -3,19 +3,24 @@
 <concept id="concept_hrs_nqy_1gb">
     <title/>
     <abstract>
-        <p>If using the Connection Manager (<codeph>USING CONNECTION</codeph> - syntax), the
+        <p>If using the Connection Manager (<codeph>USING CONNECTION</codeph> syntax), the
                 <codeph>datasource_resource</codeph> is a subpath/file in that connection.</p>
         <p>Example: Say the Connection Manager is configured and has a connection
                 <codeph>s3_connection</codeph>with correct credentials, and the root path is set to
                 <codeph>/bucket1/2018/</codeph>, and there’s a file in
-                <codeph>/bucket1/2018/january/customers.csv</codeph>. Then we can add this
-            datasource with ALTER TABLE customers ADD DATASOURCE ‘january/customers.csv’ USING
-            CONNECTION ‘s3_connection’;</p>
+                <codeph>/bucket1/2018/january/customers.csv</codeph>. Then we can add this data
+            source with</p>
+        <p>
+            <codeblock>ALTER TABLE customers ADD DATASOURCE ‘january/customers.csv’ USING CONNECTION ‘s3_connection’;</codeblock>
+        </p>
         <p>To load other file formats, you add the file type before like specified in
                 <codeph>datasource_format</codeph></p>
-        <p>ALTER TABLE customers ADD DATASOURCE PARQUET (‘january/customers.parquet’) USING
-            CONNECTION ‘s3_connection’;</p>
-        <p>Note: The <codeph>USING CONNECTION</codeph> syntax currently only works for <codeph>ADD
-                DATASOURCE</codeph>, but not for <codeph>EXPORT</codeph>.</p>
+        <p>
+            <codeblock>ALTER TABLE customers ADD DATASOURCE PARQUET (‘january/customers.parquet’) USING CONNECTION ‘s3_connection’;</codeblock>
+        </p>
+        <p>
+            <note>The <codeph>USING CONNECTION</codeph> syntax currently only works for <codeph>ADD
+                    DATASOURCE</codeph>, but not for <codeph>EXPORT</codeph>.</note>
+        </p>
     </abstract>
 </concept>
