@@ -4,16 +4,15 @@
     <title/>
     <abstract>
         <p>If using the Connection Manager (<codeph>USING CONNECTION</codeph> syntax), the
-                <codeph>datasource_resource</codeph> is a subpath/file in that connection.</p>
+                <codeph>datasource_resource</codeph> is a <filepath>subpath/file</filepath> in that
+            connection.</p>
         <p>Example: Say the Connection Manager is configured and has a connection
                 <codeph>s3_connection</codeph>with correct credentials, and the root path is set to
-                <codeph>/bucket1/2018/</codeph>, and there’s a file in
-                <codeph>/bucket1/2018/january/customers.csv</codeph>. Then we can add this data
-            source with</p>
-        <p>
-            <codeblock>ALTER TABLE customers ADD DATASOURCE ‘january/customers.csv’ USING CONNECTION ‘s3_connection’;</codeblock>
-        </p>
-        <p>To load other file formats, you add the file type before like specified in
+                <filepath>/bucket1/2018/</filepath>, and there’s a file in
+                <filepath>/bucket1/2018/january/customers.csv</filepath>. Then we can add this data
+            source
+            with:<codeblock>ALTER TABLE customers ADD DATASOURCE ‘january/customers.csv’ USING CONNECTION ‘s3_connection’;</codeblock></p>
+        <p>To load other file formats, add the file type before as specified in
                 <codeph>datasource_format</codeph></p>
         <p>
             <codeblock>ALTER TABLE customers ADD DATASOURCE PARQUET (‘january/customers.parquet’) USING CONNECTION ‘s3_connection’;</codeblock>
