@@ -4,7 +4,26 @@
     <title>test2</title>
     <shortdesc></shortdesc>
     <conbody>
-        <p>help</p>
-        <p>hwdhjewdhjehd</p>
+        <p/>
+        <section id="section_whq_tr5_dgb">
+            <title>SQL Reference for SAP Vora in SAP Data Hub</title>
+            <p>The SAP Vora SQL Reference describes all SQL data types, predicates, operators,
+                expressions, functions, statements, error codes, and system views.</p>
+            <p>To use the search function for specific SQL statements, functions or operators, see
+                the “customer documentation” guide on <xref
+                    href="https://help.sap.com/viewer/DRAFT/98fe4b43ad664cba874e0fc7ea8ecc76/2.4.0/en-US"
+                    format="html" scope="external">SAP Help Portal</xref>.</p>
+            <p>SAP Vora SQL is aligned with the SQL used by SAP HANA, so the SAP HANA SQL Reference
+                is an additional valuable source of information. In general, SAP Vora SQL is a
+                subset of SAP HANA SQL - the cases where Vora SQL differs from HANA SQL are pointed
+                out explicitly. Also note that the public interface is aligned with the SQL 2011
+                standard.</p>
+        </section>
+        <section id="section_xhq_tr5_dgb">
+            <title>Notation</title>
+            <p>This reference uses BNF (Backus-Naur Form), a notation technique used to define
+                programming languages. BNF describes the syntax of a grammar using a set of
+                production rules and a set of symbols.</p>
+        </section>
     </conbody>
 </concept>
