@@ -4,7 +4,27 @@
     <title>test2</title>
     <shortdesc></shortdesc>
     <conbody>
-        <p/>
+        <p>Due to the nature of a static code analysis, the SQLScript Code Analyzer may produce
+            false positives. To avoid confusion when analyzing large procedures with many findings,
+            and potentially many false positives, the SQLScript Code Analyzer offers a way to
+            manually suppress these false positives.</p>
+        <p>You can use SQLScript Pragmas for that purpose. The pragrmas definewhich rule should be
+            suppressed.</p>
+        <table id="table_aqs_vtp_mgb">
+            <tgroup cols="1">
+                <colspec colnum="1" colname="col1"/>
+                <tbody>
+                    <row>
+                        <entry><codeph>create</codeph>
+                            <codeph>procedure</codeph>
+                            <codeph>proc </codeph><codeph>as</codeph>
+                            <codeph>begin</codeph><codeph> </codeph><codeph>@AnalyzerSuppress(</codeph><codeph>'SAP.UNNECESSARY_VARIABLE.CONSISTENCY'</codeph><codeph>)</codeph><codeph> </codeph><codeph>declare</codeph>
+                            <codeph>a
+                                </codeph><codeph>int</codeph><codeph>;</codeph><codeph>end</codeph></entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
         <section id="section_whq_tr5_dgb">
             <title>SQL Reference for SAP Vora in SAP Data Hub</title>
             <p>The SAP Vora SQL Reference describes all SQL data types, predicates, operators,
