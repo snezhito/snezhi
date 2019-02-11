@@ -1,9 +1,201 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
 <concept id="concept_anv_jxh_tgb">
-    <title></title>
+    <title>Plan Profiler</title>
     <shortdesc></shortdesc>
     <conbody>
-        <p></p>
+        <p>
+            <table id="table_eht_kxh_tgb">
+                <tgroup cols="3">
+                    <colspec colnum="1" colname="col1"/>
+                    <colspec colnum="2" colname="col2"/>
+                    <colspec colnum="3" colname="col3"/>
+                    <tbody>
+                        <row>
+                            <entry><b>VIEW_COLUMN_NAME</b></entry>
+                            <entry><b>DATA_TYPE_NAME</b></entry>
+                            <entry><b>DESCRIPTION</b></entry>
+                        </row>
+                        <row>
+                            <entry>PROCEDURE_CONNECTION_ID</entry>
+                            <entry>INTEGER</entry>
+                            <entry>Connection ID of outermost procedure</entry>
+                        </row>
+                        <row>
+                            <entry>PROCEDURE_DATABASE_NAME</entry>
+                            <entry>NVARCHAR(256)</entry>
+                            <entry>Database name of outermost procedure</entry>
+                        </row>
+                        <row>
+                            <entry>PROCEDURE_SCHEMA_NAME</entry>
+                            <entry>NVARCHAR(256)</entry>
+                            <entry>Schema name of outermost procedure</entry>
+                        </row>
+                        <row>
+                            <entry>PROCEDURE_LIBRARY_NAME</entry>
+                            <entry>NVARCHAR(256)</entry>
+                            <entry>Library name of outermost procedure</entry>
+                        </row>
+                        <row>
+                            <entry>PROCEDURE_NAME</entry>
+                            <entry>NVARCHAR(256)</entry>
+                            <entry>Name of outermost procedure</entry>
+                        </row>
+                        <row>
+                            <entry>RESULT_ID</entry>
+                            <entry>INTEGER</entry>
+                            <entry>Profile Result ID</entry>
+                        </row>
+                        <row>
+                            <entry>OPERATOR</entry>
+                            <entry>VARCHAR</entry>
+                            <entry>Name of operation</entry>
+                        </row>
+                        <row>
+                            <entry>OPERATOR_STRING</entry>
+                            <entry>NCLOB</entry>
+                            <entry>Operator string</entry>
+                        </row>
+                        <row>
+                            <entry>OPERATOR_DETAILS</entry>
+                            <entry>NCLOB</entry>
+                            <entry>Operation details</entry>
+                        </row>
+                        <row>
+                            <entry>START_TIME</entry>
+                            <entry>TIMESTAMP</entry>
+                            <entry>Start time of the operation</entry>
+                        </row>
+                        <row>
+                            <entry>END_TIME</entry>
+                            <entry>TIMESTAMP</entry>
+                            <entry>End time of the operation</entry>
+                        </row>
+                        <row>
+                            <entry>DURATION</entry>
+                            <entry>BIGINT</entry>
+                            <entry>Clock time in microseconds between START_TIME and
+                                END_TIME</entry>
+                        </row>
+                        <row>
+                            <entry>ACTIVE_TIME_SELF</entry>
+                            <entry>BIGINT</entry>
+                            <entry>Clock time in microseconds spent in the operation itself,
+                                excluding its children</entry>
+                        </row>
+                        <row>
+                            <entry>ACTIVE_TIME_CUMULATIVE</entry>
+                            <entry>BIGINT</entry>
+                            <entry>Total clock time in microseconds spent in the operation itself
+                                and its children</entry>
+                        </row>
+                        <row>
+                            <entry>CPU_TIME_SELF</entry>
+                            <entry>BIGINT</entry>
+                            <entry>CPU time in microseconds spent in the operation itself, excluding
+                                its children</entry>
+                        </row>
+                        <row>
+                            <entry>CPU_TIME_CUMULATIVE</entry>
+                            <entry>BIGINT</entry>
+                            <entry>Total CPU time in microseconds spent in the operation itself and
+                                its children</entry>
+                        </row>
+                        <row>
+                            <entry>CONNECTION_ID</entry>
+                            <entry>INTEGER</entry>
+                            <entry>Connection ID used for the operation</entry>
+                        </row>
+                        <row>
+                            <entry>TRANSACTION_ID</entry>
+                            <entry>INTEGER</entry>
+                            <entry>Transaction ID used for the operation</entry>
+                        </row>
+                        <row>
+                            <entry>STATEMENT_ID</entry>
+                            <entry>VARCHAR</entry>
+                            <entry>Statement ID used for the operation</entry>
+                        </row>
+                        <row>
+                            <entry>THREAD_ID</entry>
+                            <entry>BIGINT</entry>
+                            <entry>Thread ID used for the operation</entry>
+                        </row>
+                        <row>
+                            <entry>OPERATOR_DATABASE_NAME</entry>
+                            <entry>NVARCHAR(256)</entry>
+                            <entry>Database name of procedure/function where operator is
+                                defined</entry>
+                        </row>
+                        <row>
+                            <entry>OPERATOR_SCHEMA_NAME</entry>
+                            <entry>NVARCHAR(256)</entry>
+                            <entry>Schema name of procedure/function where operator is
+                                defined</entry>
+                        </row>
+                        <row>
+                            <entry>OPERATOR_LIBRARY_NAME</entry>
+                            <entry>NVARCHAR(256)</entry>
+                            <entry>Library name of procedure/function where operator is
+                                defined</entry>
+                        </row>
+                        <row>
+                            <entry>OPERATOR_PROCEDURE_NAME</entry>
+                            <entry>NVARCHAR(256)</entry>
+                            <entry>Name of procedure/function where operator is defined</entry>
+                        </row>
+                        <row>
+                            <entry>OPERATOR_LINE</entry>
+                            <entry>INTEGER</entry>
+                            <entry>SQL line of operator</entry>
+                        </row>
+                        <row>
+                            <entry>OPERATOR_COLUMN</entry>
+                            <entry>INTEGER</entry>
+                            <entry>SQL column of operator</entry>
+                        </row>
+                        <row>
+                            <entry>OPERATOR_POSITION</entry>
+                            <entry>INTEGER</entry>
+                            <entry>SQL position of operator</entry>
+                        </row>
+                        <row>
+                            <entry>OPERATOR_HOST</entry>
+                            <entry>VARCHAR</entry>
+                            <entry>Host where the operation occurred</entry>
+                        </row>
+                        <row>
+                            <entry>OPERATOR_PORT</entry>
+                            <entry>INTEGER</entry>
+                            <entry>Port where the operation occurred</entry>
+                        </row>
+                        <row>
+                            <entry>OPERATOR_ID</entry>
+                            <entry>INTEGER</entry>
+                            <entry>ID of operation (cannot be joined to any other views having the
+                                same name)</entry>
+                        </row>
+                        <row>
+                            <entry>PARENT_OPERATOR_ID</entry>
+                            <entry>INTEGER</entry>
+                            <entry>ID of parent operation (cannot be joined to any other views
+                                having the same name)</entry>
+                        </row>
+                        <row>
+                            <entry>PROCEDURE_HOST</entry>
+                            <entry>VARCHAR</entry>
+                            <entry>Name of host where the outermost procedure started</entry>
+                        </row>
+                        <row>
+                            <entry>PROCEDURE_PORT</entry>
+                            <entry>INTEGER</entry>
+                            <entry>
+                                <p>Port where the outermost procedure started</p>
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </p>
     </conbody>
 </concept>
