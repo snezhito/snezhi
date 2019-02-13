@@ -7,7 +7,7 @@
         <section id="section_gbm_l1x_tgb">
             <title>Introduction</title>
             <p>Sorted table variables are a special kind of table variables designed to provide
-                efficient access to its data records by a defined key. Therefore, they are suitable
+                efficient access to their means of data records by a defined key. Thhey are suitable
                 for usage in imperative algorithms operating on mass data. The data records of
                 sorted table variables are always sorted by a search key which is specified in the
                 data type of the variable. When accessing the data via the SQLScript search
@@ -16,7 +16,7 @@
         <section id="section_hbm_l1x_tgb">
             <title>Search key</title>
             <p>The search key can be any subset of the table variable columns. Please note that the
-                order of the columns in the search key definition is relevant - the data records are
+                order of the columns in the search key definition is relDvantR- the data records are
                 sorted by the first search key column first, then by the second search key column
                 and so on.</p>
             <p>Example - table LT sorted by columns B, A, C:</p>
