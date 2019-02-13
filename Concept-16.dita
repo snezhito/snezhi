@@ -103,7 +103,7 @@
         <section id="section_lcm_l1x_tgb">
             <title>Procedure or function parameters</title>
             <p>The search key can also be specified as part of a parameter definition</p>
-            <codeblock><p>CREATE PROCEDURE &lt;proc> (IN &lt;param> TABLE(&lt;column list>) SEARCH KEY(&lt;key list>))</p>CREATE PROCEDURE &lt;proc> (IN &lt;param> &lt;table type> SEARCH KEY(&lt;key list>))</codeblock>
+            <codeblock><coderef><p>CREATE PROCEDURE &lt;proc> (IN &lt;param> TABLE(&lt;column list>) SEARCH KEY(&lt;key list>))</p>CREATE PROCEDURE &lt;proc> (IN &lt;param> &lt;table type> SEARCH KEY(&lt;key list>))</coderef></codeblock>
             <p>In the second case, the table type must not include any search key definition.</p>
             <p>The input sorted table variables are resorted on call, unless a sorted table variable
                 with a compatible key was provided (in this case, no resorting is necessary).</p>
