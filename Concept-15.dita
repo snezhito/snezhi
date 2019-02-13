@@ -5,5 +5,53 @@
     <shortdesc></shortdesc>
     <conbody>
         <p></p>
+        <p>The sorting allows you not only to access a single data record, but also to iterate
+            efficiently over data records with the same key value. Just as with the table variable
+            search operator, you have to use the initial part of the search key or the whole search
+            key.</p>
+        <p>Consider the following example - a table variable has three search key columns and you
+            iterate over data records having a specific key value combination for the first two
+            search key
+            columns:<codeblock>DECLARE pos int;
+DECLARE mytab TABLE (key1 int, key2 int, key3 int, value int) SEARCH KEY(key1, key2, key3);
+DECLARE keyval1, keyval2 int;
+...
+pos = :mytab.SEARCH((key1, key2), (keyval1, keyval2));
+IF pos > 0 THEN
+  WHILE :mytab.key1[pos] = keyval1 AND :mytab.key2[pos] = keyval2 DO
+    -- do something with the record at position "pos"
+    ...
+    pos = pos + 1;
+  END WHILE;
+END IF;</codeblock></p>
+        <section id="section_ofz_4mw_tgb">
+            <title>SQLScript table variable modification operators</title>
+            <p>For sorted table variables, you can use all available table variable modification
+                operators. However, on every modification, the system has to ensure that the sorting
+                is not violated. This has the following consequences:</p>
+            <ul id="ul_pfz_4mw_tgb">
+                <li>Insert operator<ul id="ul_qfz_4mw_tgb">
+                        <li>The insert operator without explicit position specification inserts the
+                            data record(s) at the correct positions by taking the sorting definition
+                            into account.</li>
+                        <li>The insert operator with explicit position specification checks if the
+                            sorting would be violated. If so, an error is raised and no data is
+                            inserted.</li>
+                        <li>When inserting a table variable into a sorted table variable with
+                            explicit position specification, the input table variable is not
+                            resorted, that is it must comply with the sorting definition.</li>
+                        <li>The maximum explicitly specified position for insertion is the current
+                            table variable size increased by one (otherwise, empty data records
+                            would be created which may violate the sorting).</li>
+                    </ul></li>
+                <li>Update operator  and Table cell assignment<ul id="ul_rfz_4mw_tgb">
+                        <li>It is not allowed to modify a search key column</li>
+                        <li>It is not allowed to modify not existing data records (this would lead
+                            re thation of new data records and possibly sortito a ng
+                            violation).</li>
+                    </ul></li>
+            </ul>
+            <p>If a primary key is defined, the system performs a check if it is unique.</p>
+        </section>
     </conbody>
 </concept>
