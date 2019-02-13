@@ -1,9 +1,309 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
 <concept id="concept_vvl_31x_tgb">
-    <title></title>
+    <title>Sorted Table Variables</title>
     <shortdesc></shortdesc>
     <conbody>
-        <p></p>
+        <section id="section_gbm_l1x_tgb">
+            <title>Introduction</title>
+            <p>Sorted table variables are a special kind of table variables designed to provide
+                efficient access to its data records by a defined key. Therefore, they are suitable
+                for usage in imperative algorithms operating on mass data. The data records of
+                sorted table variables are always sorted by a search key which is specified in the
+                data type of the variable. When accessing the data via the SQLScript search
+                operator, the efficient binary search is utilized if possible.</p>
+        </section>
+        <section id="section_hbm_l1x_tgb">
+            <title>Search key</title>
+            <p>The search key can be any subset of the table variable columns. Please note that the
+                order of the columns in the search key definition is relevant - the data records are
+                sorted by the first search key column first, then by the second search key column
+                and so on.</p>
+            <p>Example - table LT sorted by columns B, A, C:</p>
+            <table id="table_ibm_l1x_tgb">
+                <tgroup cols="5">
+                    <colspec colnum="1" colname="col1"/>
+                    <colspec colnum="2" colname="col2"/>
+                    <colspec colnum="3" colname="col3"/>
+                    <colspec colnum="4" colname="col4"/>
+                    <colspec colnum="5" colname="col5"/>
+                    <tbody>
+                        <row>
+                            <entry>Position </entry>
+                            <entry>A</entry>
+                            <entry>B</entry>
+                            <entry>C</entry>
+                            <entry>D </entry>
+                        </row>
+                        <row>
+                            <entry> 1</entry>
+                            <entry>0</entry>
+                            <entry>1</entry>
+                            <entry>10</entry>
+                            <entry>100</entry>
+                        </row>
+                        <row>
+                            <entry> 2</entry>
+                            <entry>2</entry>
+                            <entry>1</entry>
+                            <entry>15</entry>
+                            <entry>200</entry>
+                        </row>
+                        <row>
+                            <entry> 3</entry>
+                            <entry>1</entry>
+                            <entry>2</entry>
+                            <entry>3</entry>
+                            <entry>150</entry>
+                        </row>
+                        <row>
+                            <entry> 4</entry>
+                            <entry>1</entry>
+                            <entry>2</entry>
+                            <entry>5</entry>
+                            <entry>30</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <p>To see how the search key is utilized, check the below explanation of the table
+                variable search operator.</p>
+        </section>
+        <section id="section_acm_l1x_tgb">
+            <title>Sequence of data records</title>
+            <p>The sorting order is based on the data type of the search key. As the sorting is
+                relevant only for the SQLScript table variable search operator, it is not guaranteed
+                for all data types that the sorting behaves exactly the same as with the ORDER BY
+                specification in SQL statements and you shouldn't rely on a specific sorting.
+                Neither can you influence the sorting; in particular you cannot specify an ascending
+                or descending order.</p>
+        </section>
+        <section id="section_bcm_l1x_tgb">
+            <title>Primary key</title>
+            <p>Sorted table variables also allow primary key specification. The primary key must
+                consist exactly of the search key columns. The uniqueness of the primary key is
+                checked in every operation on the table variable (table assignment, insert operator,
+                etc.). If the uniqueness is violated, the corresponding error is thrown.</p>
+        </section>
+        <section id="section_ccm_l1x_tgb">
+            <title>Data type definition</title>
+            <p>The search key can be specified as part of a user defined table type:</p>
+            <p>CREATE TYPE &lt;name> AS TABLE (&lt;column list>) SQLSCRIPT SEARCH KEY(&lt;key
+                list>)</p>
+        </section>
+        <section id="section_gcm_l1x_tgb">
+            <title>Variable declaration</title>
+            <p>The search key can also be specified as part of a variable declaration:</p>
+            <ol id="ol_hcm_l1x_tgb">
+                <li>DECLARE &lt;name> TABLE(&lt;column list>) SEARCH KEY(&lt;key list>)</li>
+                <li>DECLARE &lt;name> &lt;table type> SEARCH KEY(&lt;key list>)</li>
+            </ol>
+            <p>In the second case, the table type must not include any search key definition.</p>
+        </section>
+        <section id="section_lcm_l1x_tgb">
+            <title>Procedure or function parameters</title>
+            <p>The search key can also be specified as part of a parameter definition:</p>
+            <ol id="ol_mcm_l1x_tgb">
+                <li>CREATE PROCEDURE &lt;proc> (IN &lt;param> TABLE(&lt;column list>) SEARCH
+                    KEY(&lt;key list>))</li>
+                <li>CREATE PROCEDURE &lt;proc> (IN &lt;param> &lt;table type> SEARCH KEY(&lt;key
+                    list>))</li>
+            </ol>
+            <p>In the second case, the table type must not include any search key definition.</p>
+            <p>The input sorted table variables are resorted on call, unless a sorted table variable
+                with a compatible key was provided (in this case, no resorting is necessary).</p>
+            <p>Input sorted table variables cannot be modified within the procedure/function.</p>
+            <p>For outermost calls, the result sets corresponding to output sorted table variables
+                are sorted according to the search key, using the ORDER BY clause. Thus you can
+                ensure that the output table parameters have a defined sequence of the data
+                records.</p>
+            <p>For subcalls, the sorted outputs can be assigned to any kind of table variable -
+                unsorted, or sorted with another search key (this requires a copy and/or a
+                resorting). The usual use case should be indeed an assignment to a sorted table
+                variable with the same search key (this requires neither a copy nor a
+                resorting).</p>
+        </section>
+        <section id="section_ncm_l1x_tgb">
+            <title>Table variable search operator and binary search</title>
+            <p>If you search by an initial part of the key or by the whole key, the binary search
+                can be utilized. If you search by some additional fields, then first the binary
+                search is applied to narrow down the search interval which is then scanned
+                sequentially.</p>
+            <p>Examples based on the table LT above:</p>
+            <table id="table_ocm_l1x_tgb">
+                <tgroup cols="2">
+                    <colspec colnum="1" colname="col1"/>
+                    <colspec colnum="2" colname="col2"/>
+                    <tbody>
+                        <row>
+                            <entry>Search statement</entry>
+                            <entry>Behavior</entry>
+                        </row>
+                        <row>
+                            <entry><codeph>:LT.SEARCH(B, 1)</codeph></entry>
+                            <entry>You search by column B. Binary search can be applied and the 1st
+                                data record is found.</entry>
+                        </row>
+                        <row>
+                            <entry><codeph>:LT.SEARCH((B, A), (1, 2))</codeph></entry>
+                            <entry>You search by columns B, A. Binary search can be applied and the
+                                2nd data record is found.</entry>
+                        </row>
+                        <row>
+                            <entry><codeph>:LT.SEARCH((B, C), (1, 15))</codeph></entry>
+                            <entry>You search by columns B, C. Binary search can be applied only for
+                                column B (B = 1), because the column A, which would be the next
+                                search key column, is not provided. The binary search narrows down
+                                the search interval to 1..2 and this interval is searched
+                                sequentially for C = 200 and the 2nd data record is found.</entry>
+                        </row>
+                        <row>
+                            <entry><codeph>:LT.SEARCH(A, 1) </codeph></entry>
+                            <entry>You search by column A. Binary search cannot be applied at all
+                                because the first search key column B was not provided. The 3rd data
+                                record is found by sequential search.</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </section>
+        <section id="section_ycm_l1x_tgb">
+            <title>Output of table search operator</title>
+            <p>If there is a matching data record, the position of the 1st matching data record is
+                returned. This is the same behavior as with unsorted table variables.</p>
+            <p>However, if you search by the complete search key (all search key columns are
+                specified) and there is no matching record, a negative value is returned instead of
+                NULL. The absolute value of the return value indicates the position where a data
+                record with the specified key values would be inserted in to keep the sorting.</p>
+            <p>Examples based on the table LT above:</p>
+            <table id="table_zcm_l1x_tgb">
+                <tgroup cols="2">
+                    <colspec colnum="1" colname="col1"/>
+                    <colspec colnum="2" colname="col2"/>
+                    <tbody>
+                        <row>
+                            <entry>Search statement</entry>
+                            <entry>Result</entry>
+                        </row>
+                        <row>
+                            <entry><codeph>:LT.SEARCH(B, 3)</codeph></entry>
+                            <entry>The full search key was not specified and there is no matching
+                                data record. The result is NULL.</entry>
+                        </row>
+                        <row>
+                            <entry><codeph>:LT.SEARCH((B, A, C), (1, 2, 20))</codeph></entry>
+                            <entry>The full search key was specified and there is no matching data
+                                record. The result is -3, because a data record having B = 1, A = 2,
+                                C = 20 would have to be inserted at position 3.</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <p>This allows you to insert a missing data record directly at the correct position.
+                Otherwise the insert operator would have to search for this position once more.</p>
+            <p>Example:</p>
+            <table id="table_jdm_l1x_tgb">
+                <tgroup cols="1">
+                    <colspec colnum="1" colname="col1"/>
+                    <tbody>
+                        <row>
+                            <entry>
+                                <pre>DECLARE lt TABLE(key int, count int) SEARCH KEY(key);
+DECLARE search_result int;
+...
+search_result = :lt.SEARCH(key, someval);
+IF search_result > 0 THEN
+  lt.count[search_result] = :lt.count[search_result] + 1;
+ELSE
+  :lt.INSERT((someval, 0), -search_result);
+END IF;</pre>
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </section>
+        <section id="section_ldm_l1x_tgb">
+            <title>Iterating over records with the same key value</title>
+            <p>The sorting allows you not only to access a single data record, but also to iterate
+                efficiently over data records with the same key value. Just as with the table
+                variable search operator, you have to use the initial part of the search key or the
+                whole search key.</p>
+            <p>Example - A table variable has 3 search key columns and you iterate over data records
+                having a specific key value combination for the first two search key columns:</p>
+            <table id="table_mdm_l1x_tgb">
+                <tgroup cols="1">
+                    <colspec colnum="1" colname="col1"/>
+                    <tbody>
+                        <row>
+                            <entry>
+                                <pre>DECLARE pos int;
+DECLARE mytab TABLE (key1 int, key2 int, key3 int, value int) SEARCH KEY(key1, key2, key3);
+DECLARE keyval1, keyval2 int;
+...
+pos = :mytab.SEARCH((key1, key2), (keyval1, keyval2));
+IF pos > 0 THEN
+  WHILE :mytab.key1[pos] = keyval1 AND :mytab.key2[pos] = keyval2 DO
+    -- do something with the record at position "pos"
+    ...
+    pos = pos + 1;
+  END WHILE;
+END IF;</pre>
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </section>
+        <section id="section_qdm_l1x_tgb">
+            <title>SQLScript table variable modification operators</title>
+            <p>For sorted table variables, you can use all available table variable modification
+                operators. However, on every modification, the system has to ensure that the sorting
+                is not violated. This has the following consequences:</p>
+            <ul id="ul_rdm_l1x_tgb">
+                <li>Insert operator<ul id="ul_sdm_l1x_tgb">
+                        <li>The insert operator without explicit position specification inserts the
+                            data record(s) at the correct positions taking the sorting definition
+                            into account.</li>
+                        <li>The insert operator with explicit position specification checks if the
+                            sorting would be violated. If so, an error is raised and no data is
+                            inserted.</li>
+                        <li>When inserting a table variable into a sorted table variable with
+                            explicit position specification, the input table variable is not
+                            resorted, i.e. it must obey the sorting definition.</li>
+                        <li>The maximum explicitly specified position for insertion is the current
+                            table variable size increased by one (otherwise, empty data records
+                            would be created which may violate the sorting).</li>
+                    </ul></li>
+                <li>Update operator/Table cell assignment<ul id="ul_tdm_l1x_tgb">
+                        <li>It is not allowed to modify a search key column</li>
+                        <li>It is not allowed to modify not existing data records (this would lead
+                            to creation of new data records and possibly sorting violation).</li>
+                    </ul></li>
+            </ul>
+            <p>As mentioned above, if a primary key is defined, then its uniqueness is checked as
+                well.</p>
+        </section>
+        <section id="section_udm_l1x_tgb">
+            <title>Table variable assignments</title>
+            <p>You can use sorted table variables as assignment target like unsorted table
+                variables. The data records will always be resorted according to the search key.
+                Additionally, if a primary key is defined, then its uniqueness is checked.</p>
+            <p>In particular, any ORDER BY clause in queries the result of which is assigned to a
+                sorted table variable, is irrelevant.</p>
+        </section>
+        <b>Limitations</b>
+        <ul id="ul_vdm_l1x_tgb">
+            <li>
+                <ul id="ul_wdm_l1x_tgb">
+                    <li>The following data types are not supported for the search key:<ul
+                            id="ul_xdm_l1x_tgb">
+                            <li>Spatial data types</li>
+                            <li>LOB types</li>
+                        </ul></li>
+                    <li>Output of table functions cannot be defined as sorted table type. </li>
+                </ul>
+            </li>
+        </ul>
     </conbody>
 </concept>
