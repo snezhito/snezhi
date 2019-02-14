@@ -2,4 +2,7 @@
 <!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
 <map>
     <title>Test</title>
+    <topicref href="Concept.dita"/>
+    <topicref href="Concept-11.dita"/>
 </map>
+<?oxy_options track_changes="on"?>
