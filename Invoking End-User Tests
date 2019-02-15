@@ -17,18 +17,9 @@
                 this privilege granted by someone else (e.g. SYSTEM user) first.</p>
             <p>To invoke End-User Tests in the SQLScript Test-Framework, the following CALL
                 statement has to be executed.</p>
-            <table id="table_vtl_bbp_5gb">
-                <tgroup cols="1">
-                    <colspec colnum="1" colname="col1"/>
-                    <tbody>
-                        <row>
-                            <entry>
-                                <pre>CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('&lt;json_string>', ?, ?, ?)</pre>
-                            </entry>
-                        </row>
-                    </tbody>
-                </tgroup>
-            </table>
+           
+            <codeblock>CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('&lt;json_string>', ?, ?, ?)</codeblock>
+                          
             <p>The first parameter of SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA specifies the
                 testplan to be executed and has to be provided in JSON format. The testplan
                 specifies which tests shall be run and in which configurations they shall be run.
@@ -36,20 +27,11 @@
                 to be executed by the Test-Framework. Note that also wildcards can be used to
                 specify values in the json string ('*' for multiple wildcard characters, '?' for
                 exactly one wildcard character). Some simple examples would look as follows.</p>
-            <table id="table_d5l_bbp_5gb">
-                <tgroup cols="1">
-                    <colspec colnum="1" colname="col1"/>
-                    <tbody>
-                        <row>
-                            <entry>
-                                <pre>CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('{"schema":"MY_SCHEMA","library":"*"}', ?, ?, ?)
-CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('{"schema":"MY_SCHEMA","library":"LIB*TEST"}', ?, ?, ?)
-CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('[{"schema":"MY_SCHEMA","library":"SOME_PREFIX_*"},{"schema":"OTHER_SCHEMA","library":"*_SOME_SUFFIX"}]', ?, ?, ?)</pre>
-                            </entry>
-                        </row>
-                    </tbody>
-                </tgroup>
-            </table>
+          
+            <codeblock>CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('{"schema":"MY_SCHEMA","library":"*"}', ?, ?, ?)
+					CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('{"schema":"MY_SCHEMA","library":"LIB*TEST"}', ?, ?, ?)
+					CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('[{"schema":"MY_SCHEMA","library":"SOME_PREFIX_*"},{"schema":"OTHER_SCHEMA","library":"*_SOME_SUFFIX"}]', ?, ?, ?)</codeblock>
+                           
             <p>The first call to SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA will run all tests (in all
                 their configurations respectively) of all libraries with language type SQLSCRIPT
                 TEST in schema MY_SCHEMA. The second call will do the same but applies a filter to
@@ -60,13 +42,8 @@ CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('[{"schema":"MY_SCHEMA","library":
                 '_SOME_SUFFIX'.</p>
             <p>The complete definition of what can be provided in the testplan's JSON string is
                 depicted below.</p>
-            <table id="table_j5l_bbp_5gb">
-                <tgroup cols="1">
-                    <colspec colnum="1" colname="col1"/>
-                    <tbody>
-                        <row>
-                            <entry>
-                                <pre>&lt;test_plan> ::= &lt;lib_spec> || &lt;lib_spec_list>
+       
+                                <codeblock>&lt;test_plan> ::= &lt;lib_spec> || &lt;lib_spec_list>
 
 &lt;lib_spec_list> ::= '[' &lt;lib_spec> [',' &lt;lib_spec>] ']'
 
@@ -80,21 +57,12 @@ CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('[{"schema":"MY_SCHEMA","library":
 
 &lt;wildcard_pattern_list> ::= '"' &lt;wildcard_pattern> '"' [', "' &lt;wildcard_pattern> '"']
 
-&lt;wildcard_pattern> ::= letter_or_digit_or_asteriks+</pre>
-                            </entry>
-                        </row>
-                    </tbody>
-                </tgroup>
-            </table>
+&lt;wildcard_pattern> ::= letter_or_digit_or_asteriks+</codeblock>
+                           
             <p>Note that &lt;wildcard_pattern> is always case-sensitive.</p>
             <p>Examples:</p>
-            <table id="table_l5l_bbp_5gb">
-                <tgroup cols="1">
-                    <colspec colnum="1" colname="col1"/>
-                    <tbody>
-                        <row>
-                            <entry>
-                                <pre>[{
+         
+                                <codeblock>[{
     "schema":"MY_SCHEMA",
     "library":"*"
 },
@@ -121,12 +89,8 @@ CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('[{"schema":"MY_SCHEMA","library":
         "configurations": ["*SINGLE_NODE*", "*SCALE_OUT*"],
         "exclude-configurations": ["*STRESS_TEST*"]
     }]
-}]</pre>
-                            </entry>
-                        </row>
-                    </tbody>
-                </tgroup>
-            </table>
+}]</codeblock>
+                            
         </section>
         <section id="section_q5l_bbp_5gb">
             <title>Behavior</title>
