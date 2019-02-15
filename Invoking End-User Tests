@@ -111,11 +111,10 @@
                     error will be thrown. Also no entries will be added to the output tables.</li>
             </ul>
             <note>
-                <p>ach entry in &lt;run_spec_list> will cause a separate list of tests and
+                <p>Each entry in &lt;run_spec_list> will cause a separate list of tests and
                     configurations to be added to the testp lan depending on the values of the inner
-                    &lt;run_spec_member> entries. Thus, it could happen that some tests as well as
-                    configurations of the same library will be executed repeatedly by the Test-Fr
-                    fework.</p>
+                    &lt;run_spec_member> entries. In that way some tests as well as configurations
+                    of the same library may be executed repeatedly by the Test-Framework.</p>
             </note>
         </section>
         <section id="section_x5l_bbp_5gb">
