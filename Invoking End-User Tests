@@ -98,7 +98,7 @@
                 <li>Invalid syntax or semantics result in an error.</li>
                 <li>Unknown properties produce a warning.</li>
                 <li>
-                    <p>Property "library" is mandatory, but there are default values for other
+                    <p>Property "library" is mandatory but there are default values for other
                         properties:</p>
                     <p>
                         <ul id="ul_s5l_bbp_5gb">
@@ -111,7 +111,7 @@
                     </p>
                 </li>
                 <li>When "tests" and "exclude-tests" match exactly the same values, an error will be
-                    thrown. Same applies to "configurations" and "exclude-configurations".</li>
+                    thrown. The same applies to "configurations" and "exclude-configurations".</li>
                 <li>When both "exclude-tests" and "tests" are given, "exclude-tests" will always
                     have higher precedence. Same applies to "exclude-configurations" and
                     "configurations".</li>
