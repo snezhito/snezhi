@@ -97,8 +97,8 @@
                             <li>If "schema" is not specified, current session schema will be
                                 used.</li>
                             <li>If "run" is not specified, all configurations and tests will be
-                                selected. i.e. identical to "run": [{ "tests": [ "*" ],
-                                "configurations": [ "*" ] }].</li>
+                                selected. That is  identical to "run": <codeph>[{ "tests": [ "*" ],
+                                    "configurations": [ "*" ] }]</codeph>.</li>
                         </ul>
                     </p>
                 </li>
