@@ -4,6 +4,324 @@
     <title></title>
     <shortdesc></shortdesc>
     <conbody>
-        <p></p>
+        <section id="section_utl_bbp_5gb">
+            <title>Invoking End-User Tests</title>
+            <p>The entry point of the End-User Test-Framework in SQLScript is the built-in procedure
+                SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA. As the name already indicates, the tests
+                will be run on the existing data in the system. That means that users have to be
+                very careful when writing tests that change or delete objects or data in the system
+                since others might be influenced by these changes. Thus, tests themselves can also
+                be influenced by other tests running in parallel in the same system. Additionally,
+                users do not have the EXECUTE privilege for the built-in procedure
+                SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA by default. Each user would have to get
+                this privilege granted by someone else (e.g. SYSTEM user) first.</p>
+            <p>To invoke End-User Tests in the SQLScript Test-Framework, the following CALL
+                statement has to be executed.</p>
+            <table id="table_vtl_bbp_5gb">
+                <tgroup cols="1">
+                    <colspec colnum="1" colname="col1"/>
+                    <tbody>
+                        <row>
+                            <entry>
+                                <pre>CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('&lt;json_string>', ?, ?, ?)</pre>
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <p>The first parameter of SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA specifies the
+                testplan to be executed and has to be provided in JSON format. The testplan
+                specifies which tests shall be run and in which configurations they shall be run.
+                Furthermore, the testplan also contains information about which test libraries are
+                to be executed by the Test-Framework. Note that also wildcards can be used to
+                specify values in the json string ('*' for multiple wildcard characters, '?' for
+                exactly one wildcard character). Some simple examples would look as follows.</p>
+            <table id="table_d5l_bbp_5gb">
+                <tgroup cols="1">
+                    <colspec colnum="1" colname="col1"/>
+                    <tbody>
+                        <row>
+                            <entry>
+                                <pre>CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('{"schema":"MY_SCHEMA","library":"*"}', ?, ?, ?)
+CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('{"schema":"MY_SCHEMA","library":"LIB*TEST"}', ?, ?, ?)
+CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('[{"schema":"MY_SCHEMA","library":"SOME_PREFIX_*"},{"schema":"OTHER_SCHEMA","library":"*_SOME_SUFFIX"}]', ?, ?, ?)</pre>
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <p>The first call to SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA will run all tests (in all
+                their configurations respectively) of all libraries with language type SQLSCRIPT
+                TEST in schema MY_SCHEMA. The second call will do the same but applies a filter to
+                the libraries which are to be executed. Here, only SQLSCRIPT TEST libraries having a
+                name starting with 'LIB' and ending with 'TEST' will be executed by the
+                Test-Framework. For the third call, also libraries with language type SQLSCRIPT TEST
+                in schema OTHER_SCHEMA will be executed but their name has to end with
+                '_SOME_SUFFIX'.</p>
+            <p>The complete definition of what can be provided in the testplan's JSON string is
+                depicted below.</p>
+            <table id="table_j5l_bbp_5gb">
+                <tgroup cols="1">
+                    <colspec colnum="1" colname="col1"/>
+                    <tbody>
+                        <row>
+                            <entry>
+                                <pre>&lt;test_plan> ::= &lt;lib_spec> || &lt;lib_spec_list>
+
+&lt;lib_spec_list> ::= '[' &lt;lib_spec> [',' &lt;lib_spec>] ']'
+
+&lt;lib_spec> ::= '{' ["schema":"' &lt;wildcard_pattern> '",] "library":"' &lt;wildcard_pattern> '"' [', "run":' &lt;run_spec_list>] '}'
+
+&lt;run_spec_list> ::= '[' &lt;run_spec> [',' &lt;run_spec>] ']'
+
+&lt;run_spec> ::= '{' &lt;run_spec_member> [',' &lt;run_spec_member] '}'
+
+&lt;run_spec_member> ::= [ '"tests":[' &lt;wildcard_pattern_list> ']' || '"configurations":[' &lt;wildcard_pattern_list> ']' || '"exclude-tests":[' &lt;wildcard_pattern_list> ']' || '"exclude-configurations":[' &lt;wildcard_pattern_list> ']' ]
+
+&lt;wildcard_pattern_list> ::= '"' &lt;wildcard_pattern> '"' [', "' &lt;wildcard_pattern> '"']
+
+&lt;wildcard_pattern> ::= letter_or_digit_or_asteriks+</pre>
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <p>Note that &lt;wildcard_pattern> is always case-sensitive.</p>
+            <p>Examples:</p>
+            <table id="table_l5l_bbp_5gb">
+                <tgroup cols="1">
+                    <colspec colnum="1" colname="col1"/>
+                    <tbody>
+                        <row>
+                            <entry>
+                                <pre>[{
+    "schema":"MY_SCHEMA",
+    "library":"*"
+},
+{
+    "library": "MY_LIB",
+    "run": [{
+        "exclude-tests": ["A", "B"],
+        "configurations": ["config1", "config3"]
+    },
+    {
+        "tests": ["A", "B"],
+        "exclude-configurations": ["config2"]
+    }]
+},
+{
+    "schema": "MY_SCHEMA",
+    "library": "*",
+    "run": [{
+        "tests": ["*TEST*KERNEL*"],
+        "exclude-tests": ["DISABLED_*"],
+        "exclude-configurations": ["*SCALE_OUT*"]
+    },
+    {
+        "configurations": ["*SINGLE_NODE*", "*SCALE_OUT*"],
+        "exclude-configurations": ["*STRESS_TEST*"]
+    }]
+}]</pre>
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </section>
+        <section id="section_q5l_bbp_5gb">
+            <title>Behavior</title>
+            <ul id="ul_r5l_bbp_5gb">
+                <li>Invalid syntax or semantics result in an error.</li>
+                <li>Unknown properties produce a warning.</li>
+                <li>
+                    <p>Property "library" is mandatory, but there are default values for other
+                        properties:</p>
+                    <p>
+                        <ul id="ul_s5l_bbp_5gb">
+                            <li>If "schema" is not specified, current session schema will be
+                                used.</li>
+                            <li>If "run" is not specified, all configurations and tests will be
+                                selected. i.e. identical to "run": [{ "tests": [ "*" ],
+                                "configurations": [ "*" ] }].</li>
+                        </ul>
+                    </p>
+                </li>
+                <li>When "tests" and "exclude-tests" match exactly the same values, an error will be
+                    thrown. Same applies to "configurations" and "exclude-configurations".</li>
+                <li>When both "exclude-tests" and "tests" are given, "exclude-tests" will always
+                    have higher precedence. Same applies to "exclude-configurations" and
+                    "configurations".</li>
+                <li>An empty testplan will be generated if the input does not match any tests and no
+                    error will be thrown. Also no entries will be added to the output tables.</li>
+            </ul>
+            <p>Note that each entry in &lt;run_spec_list> will cause a separate list of tests and
+                configurations to be added to the testplan depending on the values of the inner
+                &lt;run_spec_member> entries. Thus, it could happen that some tests as well as
+                configurations of the same library will be executed repeatedly by the
+                Test-Framework.</p>
+        </section>
+        <section id="section_x5l_bbp_5gb">
+            <title>Output</title>
+            <p>The three output parameters of SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA have the
+                following table structures.</p>
+        </section>
+        <b>1) results</b>
+        <table id="table_y5l_bbp_5gb">
+            <tgroup cols="3">
+                <colspec colnum="1" colname="col1"/>
+                <colspec colnum="2" colname="col2"/>
+                <colspec colnum="3" colname="col3"/>
+                <tbody>
+                    <row>
+                        <entry><u><b>Column name</b></u></entry>
+                        <entry><u><b>Type</b></u></entry>
+                        <entry><u><b>Description</b></u></entry>
+                    </row>
+                    <row>
+                        <entry><b>SCHEMA_NAME</b></entry>
+                        <entry>NVARCHAR(256)</entry>
+                        <entry>Schema name</entry>
+                    </row>
+                    <row>
+                        <entry><b>LIBRARY_NAME</b></entry>
+                        <entry>NVARCHAR(256)</entry>
+                        <entry>Library name</entry>
+                    </row>
+                    <row>
+                        <entry><b>CONFIGURATION_NAME</b></entry>
+                        <entry>NVARCHAR(256)</entry>
+                        <entry>Configuration name</entry>
+                    </row>
+                    <row>
+                        <entry><b>TEST_NAME</b></entry>
+                        <entry>NVARCHAR(256)</entry>
+                        <entry>Test name</entry>
+                    </row>
+                    <row>
+                        <entry><b>TEST_EXECUTION_ID</b></entry>
+                        <entry>BIGINT</entry>
+                        <entry>Unique identifier for lookup in details output table</entry>
+                    </row>
+                    <row>
+                        <entry><b>TEST_EXECUTION_TIME</b></entry>
+                        <entry>BIGINT</entry>
+                        <entry>Duration in microseconds</entry>
+                    </row>
+                    <row>
+                        <entry><b>TEST_EXECUTION_MEMORY_SIZE</b></entry>
+                        <entry>BIGINT</entry>
+                        <entry>Memory size used during test execution (cf.
+                            M_ACTIVE_PROCEDURES)</entry>
+                    </row>
+                    <row>
+                        <entry><b>TEST_EXECUTION_RESULT_STATE</b></entry>
+                        <entry>VARCHAR(16)</entry>
+                        <entry>
+                            <p>Test result</p>
+                            <p>PASSED | FAILED | ERROR | SKIPPED | CANCELLED</p>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><b>TEST_COMMENTS</b></entry>
+                        <entry>NVARCHAR(5000)</entry>
+                        <entry>User-defined comment defined for corresponding member in test
+                            library</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <b>2) details</b>
+        <table id="table_pvl_bbp_5gb">
+            <tgroup cols="3">
+                <colspec colnum="1" colname="col1"/>
+                <colspec colnum="2" colname="col2"/>
+                <colspec colnum="3" colname="col3"/>
+                <tbody>
+                    <row>
+                        <entry><u><b>Column name</b></u></entry>
+                        <entry><u><b>Type</b></u></entry>
+                        <entry><u><b>Description</b></u></entry>
+                    </row>
+                    <row>
+                        <entry><b>TEST_EXECUTION_ID</b></entry>
+                        <entry>BIGINT</entry>
+                        <entry>Identifier for particular test run</entry>
+                    </row>
+                    <row>
+                        <entry><b>RESULT_DETAIL_ID</b></entry>
+                        <entry>BIGINT</entry>
+                        <entry>Unique identifier for lookup in callstacks output table</entry>
+                    </row>
+                    <row>
+                        <entry><b>RESULT_DETAIL</b></entry>
+                        <entry>NCLOB</entry>
+                        <entry>Long text describing what failed / which error occurred during test
+                            run</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <b>3) callstacks</b>
+        <table id="table_cwl_bbp_5gb">
+            <tgroup cols="3">
+                <colspec colnum="1" colname="col1"/>
+                <colspec colnum="2" colname="col2"/>
+                <colspec colnum="3" colname="col3"/>
+                <tbody>
+                    <row>
+                        <entry><u><b>Column name</b></u></entry>
+                        <entry><u><b>Type</b></u></entry>
+                        <entry><u><b>Description</b></u></entry>
+                    </row>
+                    <row>
+                        <entry><b>RESULT_DETAIL_ID</b></entry>
+                        <entry>BIGINT</entry>
+                        <entry>Identifier for particular callstack</entry>
+                    </row>
+                    <row>
+                        <entry><b>FRAME_LEVEL</b></entry>
+                        <entry>INTEGER</entry>
+                        <entry>Level of callstack frame</entry>
+                    </row>
+                    <row>
+                        <entry><b>DATABASE_NAME</b></entry>
+                        <entry>NVARCHAR(256)</entry>
+                        <entry>Database name</entry>
+                    </row>
+                    <row>
+                        <entry><b>SCHEMA_NAME</b></entry>
+                        <entry>NVARCHAR(256)</entry>
+                        <entry>Schema name</entry>
+                    </row>
+                    <row>
+                        <entry><b>OBJECT_NAME</b></entry>
+                        <entry>NVARCHAR(256)</entry>
+                        <entry>Object name</entry>
+                    </row>
+                    <row>
+                        <entry><b>MEMBER_NAME</b></entry>
+                        <entry>NVARCHAR(256)</entry>
+                        <entry>Library member name</entry>
+                    </row>
+                    <row>
+                        <entry><b>LINE</b></entry>
+                        <entry>INTEGER</entry>
+                        <entry>SQL line number</entry>
+                    </row>
+                    <row>
+                        <entry><b>COLUMN</b></entry>
+                        <entry>INTEGER</entry>
+                        <entry>SQL column value</entry>
+                    </row>
+                    <row>
+                        <entry><b>POSITION</b></entry>
+                        <entry>INTEGER</entry>
+                        <entry>
+                            <p>SQL position value</p>
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
     </conbody>
 </concept>
