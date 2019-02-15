@@ -4,6 +4,21 @@
     <title></title>
     <shortdesc></shortdesc>
     <conbody>
-        <p></p>
+        <section id="section_dgs_dg2_5gb">
+            <title>End-User Test Framework in SQLScript</title>
+            <p>For writing end-user tests in SQLScript, the already existing mechanism of libraries
+                in SQLScript will be re-used. To specify that a library contains end-user tests, the
+                new language type SQLSCRIPT TEST has been introduced which can only be used for
+                libraries at the moment. To ensure a clear separation between productive and
+                test-only coding, libraries of that language type cannot be used in any other
+                function, procedure or library which is not of language type SQLSCRIPT TEST.</p>
+            <codeblock>CREATE LIBRARY LIB_TEST LANGUAGE SQLSCRIPT TEST AS BEGIN &lt;body> END;</codeblock>
+            <p>Within the body of such a test library certain new SQLScript pragmas can be used to
+                mark a library member procedure as test or as test-related coding: @Test(),
+                @TestSetup(), @TestTeardown(), @TestSetupConfig('ConfigName'),
+                @TestTeardownConfig('ConfigName'), @TestSetupLibrary() as well as
+                @TestTearDownLibrary(). Those pragmas are only supported for library member
+                procedures and the procedures may not have any parameters.</p>
+        </section>
     </conbody>
 </concept>
