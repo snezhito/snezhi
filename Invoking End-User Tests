@@ -17,9 +17,7 @@
                 this privilege granted by someone else (e.g. SYSTEM user) first.</p>
             <p>To invoke End-User Tests in the SQLScript Test-Framework, the following CALL
                 statement has to be executed.</p>
-           
             <codeblock>CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('&lt;json_string>', ?, ?, ?)</codeblock>
-                          
             <p>The first parameter of SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA specifies the
                 testplan to be executed and has to be provided in JSON format. The testplan
                 specifies which tests shall be run and in which configurations they shall be run.
@@ -27,11 +25,9 @@
                 to be executed by the Test-Framework. Note that also wildcards can be used to
                 specify values in the json string ('*' for multiple wildcard characters, '?' for
                 exactly one wildcard character). Some simple examples would look as follows.</p>
-          
             <codeblock>CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('{"schema":"MY_SCHEMA","library":"*"}', ?, ?, ?)
 					CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('{"schema":"MY_SCHEMA","library":"LIB*TEST"}', ?, ?, ?)
 					CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('[{"schema":"MY_SCHEMA","library":"SOME_PREFIX_*"},{"schema":"OTHER_SCHEMA","library":"*_SOME_SUFFIX"}]', ?, ?, ?)</codeblock>
-                           
             <p>The first call to SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA will run all tests (in all
                 their configurations respectively) of all libraries with language type SQLSCRIPT
                 TEST in schema MY_SCHEMA. The second call will do the same but applies a filter to
@@ -42,8 +38,7 @@
                 '_SOME_SUFFIX'.</p>
             <p>The complete definition of what can be provided in the testplan's JSON string is
                 depicted below.</p>
-       
-                                <codeblock>&lt;test_plan> ::= &lt;lib_spec> || &lt;lib_spec_list>
+            <codeblock>&lt;test_plan> ::= &lt;lib_spec> || &lt;lib_spec_list>
 
 &lt;lib_spec_list> ::= '[' &lt;lib_spec> [',' &lt;lib_spec>] ']'
 
@@ -58,11 +53,9 @@
 &lt;wildcard_pattern_list> ::= '"' &lt;wildcard_pattern> '"' [', "' &lt;wildcard_pattern> '"']
 
 &lt;wildcard_pattern> ::= letter_or_digit_or_asteriks+</codeblock>
-                           
             <p>Note that &lt;wildcard_pattern> is always case-sensitive.</p>
             <p>Examples:</p>
-         
-                                <codeblock>[{
+            <codeblock>[{
     "schema":"MY_SCHEMA",
     "library":"*"
 },
@@ -90,7 +83,6 @@
         "exclude-configurations": ["*STRESS_TEST*"]
     }]
 }]</codeblock>
-                            
         </section>
         <section id="section_q5l_bbp_5gb">
             <title>Behavior</title>
@@ -98,7 +90,7 @@
                 <li>Invalid syntax or semantics result in an error.</li>
                 <li>Unknown properties produce a warning.</li>
                 <li>
-                    <p>Property "library" is mandatory but there are default values for other
+                    <p>The property "library" is mandatory but there are default values for other
                         properties:</p>
                     <p>
                         <ul id="ul_s5l_bbp_5gb">
@@ -225,7 +217,7 @@
                 </tbody>
             </tgroup>
         </table>
-        <b>3) callstacks</b>
+        <b>3) call stacks</b>
         <table id="table_cwl_bbp_5gb">
             <tgroup cols="3">
                 <colspec colnum="1" colname="col1"/>
