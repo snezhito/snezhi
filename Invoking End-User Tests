@@ -20,11 +20,10 @@
             <codeblock>CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('&lt;json_string>', ?, ?, ?)</codeblock>
             <p>The first parameter of SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA specifies the test
                 plan to be executed and has to be provided in JSON format. The test plan specifies
-                which tests with what configuration shall be run. The test plan also contains
-                information about which test libraries are to be executed by the test framework.
-                    <note> Wildcards can be used to specify values in the JSON string ('*' for
-                    multiple wildcard characters, '?' for exactly one wildcard
-                character).</note></p>
+                which tests and with what configuration shall be run. It also contains information
+                about which test libraries are to be executed by the test framework. <note>
+                    Wildcards can be used to specify values in the JSON string ('*' for multiple
+                    wildcard characters, '?' for exactly one wildcard character).</note></p>
             <codeblock>CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('{"schema":"MY_SCHEMA","library":"*"}', ?, ?, ?)
 					CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('{"schema":"MY_SCHEMA","library":"LIB*TEST"}', ?, ?, ?)
 					CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('[{"schema":"MY_SCHEMA","library":"SOME_PREFIX_*"},{"schema":"OTHER_SCHEMA","library":"*_SOME_SUFFIX"}]', ?, ?, ?)</codeblock>
