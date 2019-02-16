@@ -35,8 +35,8 @@
                 Test-Framework. For the third call, also libraries with language type SQLSCRIPT TEST
                 in schema OTHER_SCHEMA will be executed but their name has to end with
                 '_SOME_SUFFIX'.</p>
-            <p>The complete definition of what can be provided in the testplan JSON string is
-                depicted below.</p>
+            <p>The complete definition of what can be provided in the JSON string of the test plan
+                is depicted below.</p>
             <codeblock>&lt;test_plan> ::= &lt;lib_spec> || &lt;lib_spec_list>
 
 &lt;lib_spec_list> ::= '[' &lt;lib_spec> [',' &lt;lib_spec>] ']'
