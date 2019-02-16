@@ -7,14 +7,14 @@
         <section id="section_utl_bbp_5gb">
             <title>Invoking End-User Tests</title>
             <p>The entry point of the end-user test framework in SQLScript is the built-in procedure
-                SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA. As the name indicates, the tests are run
-                on the existing data in the system. <note>You need to be very careful when writing
-                    tests that change or delete objects or data in the system because others may be
-                    influenced by these changes. Tests themselves may also be influenced by other
-                    tests running in parallel on the same system. Users do not have the EXECUTE
-                    privilege for the built-in procedure SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA by
-                    default. You need to get this privilege granted (for example, by a SYSTEM
-                    user).</note></p>
+                SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA. <note>As the name of the procedure
+                    indicates, the tests are run on the existing data in the system. You need to be
+                    very careful when writing tests that change or delete objects or data in the
+                    system because others may be influenced by these changes. Tests themselves may
+                    also be influenced by other tests running in parallel on the same system. Users
+                    do not have the EXECUTE privilege for the built-in procedure
+                    SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA by default. You need to get this
+                    privilege granted (for example, by a SYSTEM user).</note></p>
             <p>To invoke end-user tests in the SQLScript test framework, the following CALL
                 statement has to be executed.</p>
             <codeblock>CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('&lt;json_string>', ?, ?, ?)</codeblock>
@@ -29,14 +29,14 @@
 					CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('[{"schema":"MY_SCHEMA","library":"SOME_PREFIX_*"},{"schema":"OTHER_SCHEMA","library":"*_SOME_SUFFIX"}]', ?, ?, ?)</codeblock>
             <p>The first call to SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA will run all tests (in all
                 their configurations respectively) of all libraries with language type SQLSCRIPT
-                TEST in schema MY_SCHEMA. The second call will do the same but applies a filter to
-                the libraries which are to be executed. Here, only SQLSCRIPT TEST libraries having a
-                name starting with 'LIB' and ending with 'TEST' will be executed by the
-                Test-Framework. For the third call, also libraries with language type SQLSCRIPT TEST
-                in schema OTHER_SCHEMA will be executed but their name has to end with
+                TEST in the schema MY_SCHEMA. The second call will do the same but applies a filter
+                to the libraries that are to be executed. Here, only SQLSCRIPT TEST libraries having
+                a name starting with 'LIB' and ending with 'TEST' will be executed by the test
+                framework. For the third call, also libraries with language type SQLSCRIPT TEST in
+                the schema OTHER_SCHEMA will be executed but their name has to end with
                 '_SOME_SUFFIX'.</p>
             <p>The complete definition of what can be provided in the JSON string of the test plan
-                is depicted below.</p>
+                is described below.</p>
             <codeblock>&lt;test_plan> ::= &lt;lib_spec> || &lt;lib_spec_list>
 
 &lt;lib_spec_list> ::= '[' &lt;lib_spec> [',' &lt;lib_spec>] ']'
