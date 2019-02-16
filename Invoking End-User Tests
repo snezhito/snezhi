@@ -8,23 +8,23 @@
             <title>Invoking End-User Tests</title>
             <p>The entry point of the end-user test framework in SQLScript is the built-in procedure
                 SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA. As the name indicates, the tests are run
-                on the existing data in the system. <note>Users need to be very careful when writing
+                on the existing data in the system. <note>You need to be very careful when writing
                     tests that change or delete objects or data in the system because others may be
                     influenced by these changes. Tests themselves may also be influenced by other
-                    tests running in parallel in the same system. Users do not have the EXECUTE
+                    tests running in parallel on the same system. Users do not have the EXECUTE
                     privilege for the built-in procedure SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA by
-                    default. Each user would have to get this privilege granted by someone else (for
-                    example, a SYSTEM user) first.</note></p>
-            <p>To invoke End-User Tests in the SQLScript Test-Framework, the following CALL
+                    default. You need to get this privilege granted (for example, by a SYSTEM
+                    user).</note></p>
+            <p>To invoke end-user tests in the SQLScript Test-Framework, the following CALL
                 statement has to be executed.</p>
             <codeblock>CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('&lt;json_string>', ?, ?, ?)</codeblock>
-            <p>The first parameter of SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA specifies the
-                testplan to be executed and has to be provided in JSON format. The testplan
-                specifies which tests shall be run and in which configurations they shall be run.
-                Furthermore, the testplan also contains information about which test libraries are
-                to be executed by the Test-Framework. Note that also wildcards can be used to
-                specify values in the json string ('*' for multiple wildcard characters, '?' for
-                exactly one wildcard character). Some simple examples would look as follows.</p>
+            <p>The first parameter of SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA specifies the test
+                plan to be executed and has to be provided in JSON format. The test plan specifies
+                which tests with what configuration shall be run. The test plan also contains
+                information about which test libraries are to be executed by the test framework.
+                Note that also wildcards can be used to specify values in the json string ('*' for
+                multiple wildcard characters, '?' for exactly one wildcard character). Some simple
+                examples would look as follows.</p>
             <codeblock>CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('{"schema":"MY_SCHEMA","library":"*"}', ?, ?, ?)
 					CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('{"schema":"MY_SCHEMA","library":"LIB*TEST"}', ?, ?, ?)
 					CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('[{"schema":"MY_SCHEMA","library":"SOME_PREFIX_*"},{"schema":"OTHER_SCHEMA","library":"*_SOME_SUFFIX"}]', ?, ?, ?)</codeblock>
