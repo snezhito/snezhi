@@ -53,7 +53,7 @@
 &lt;wildcard_pattern_list> ::= '"' &lt;wildcard_pattern> '"' [', "' &lt;wildcard_pattern> '"']
 
 &lt;wildcard_pattern> ::= letter_or_digit_or_asteriks+</codeblock>
-            <p>Note that &lt;wildcard_pattern> is always case-sensitive.</p>
+            <note>&lt;wildcard_pattern> is always case-sensitive.</note>
             <p>Examples:</p>
             <codeblock>[{
     "schema":"MY_SCHEMA",
