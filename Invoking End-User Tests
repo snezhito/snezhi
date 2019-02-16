@@ -112,9 +112,9 @@
             </ul>
             <note>
                 <p>Each entry in &lt;run_spec_list> will cause a separate list of tests and
-                    configurations to be added to the testp lan depending on the values of the inner
+                    configurations to be added to the test plan depending on the values of the inner
                     &lt;run_spec_member> entries. In that way some tests as well as configurations
-                    of the same library may be executed repeatedly by the Test-Framework.</p>
+                    of the same library may be executed repeatedly by the Tett-F fmework.</p>
             </note>
         </section>
         <section id="section_x5l_bbp_5gb">
