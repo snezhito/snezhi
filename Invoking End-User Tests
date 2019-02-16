@@ -8,13 +8,13 @@
             <title>Invoking End-User Tests</title>
             <p>The entry point of the end-user test framework in SQLScript is the built-in procedure
                 SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA. As the name indicates, the tests are run
-                on the existing data in the system. That means that users have to be very careful
-                when writing tests that change or delete objects or data in the system since others
-                might be influenced by these changes. Tests themselves may also be influenced by
-                other tests running in parallel in the same system. Additionally, users do not have
-                the EXECUTE privilege for the built-in procedure
-                SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA by default. Each user would have to get
-                this privilege granted by someone else (e.g. SYSTEM user) first.</p>
+                on the existing data in the system. <note>Users need to be very careful when writing
+                    tests that change or delete objects or data in the system because others may be
+                    influenced by these changes. Tests themselves may also be influenced by other
+                    tests running in parallel in the same system. Users do not have the EXECUTE
+                    privilege for the built-in procedure SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA by
+                    default. Each user would have to get this privilege granted by someone else (for
+                    example, a SYSTEM user) first.</note></p>
             <p>To invoke End-User Tests in the SQLScript Test-Framework, the following CALL
                 statement has to be executed.</p>
             <codeblock>CALL SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA('&lt;json_string>', ?, ?, ?)</codeblock>
