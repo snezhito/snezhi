@@ -4,6 +4,164 @@
     <title></title>
     <shortdesc></shortdesc>
     <conbody>
-        <p></p>
+        <section id="section_g15_kyv_vgb">
+            <title>Listing End-User Tests</title>
+            <p>For checking which tests and configurations will be invoked by the test framework
+                when providing a certain JSON string as testplan description, the built-in library
+                SYS.SQLSCRIPT_TEST contains two additional procedures:</p>
+            <table id="table_h15_kyv_vgb">
+                <tgroup cols="1">
+                    <colspec colnum="1" colname="col1"/>
+                    <tbody>
+                        <row>
+                            <entry><codeph>CALL
+                                    SYS.SQLSCRIPT_TEST:LIST_TESTS(</codeph><codeph>'&lt;json_string>'</codeph><codeph>)</codeph><codeph>CALL
+                                    SYS.SQLSCRIPT_TEST:LIST_CONFIGURATIONS(</codeph><codeph>'&lt;json_string>'</codeph><codeph>)</codeph></entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <p>Examples:</p>
+            <table id="table_k15_kyv_vgb">
+                <tgroup cols="1">
+                    <colspec colnum="1" colname="col1"/>
+                    <tbody>
+                        <row>
+                            <entry><codeph>CALL
+                                    SYS.SQLSCRIPT_TEST:LIST_TESTS(</codeph><codeph>'{"schema":"MY_SCHEMA","library":"*"}'</codeph><codeph>,
+                                    ?)</codeph><codeph>CALL
+                                    SYS.SQLSCRIPT_TEST:LIST_TESTS(</codeph><codeph>'{"schema":"MY_SCHEMA","library":"LIB*TEST"}'</codeph><codeph>,
+                                    ?)</codeph><codeph>CALL
+                                    SYS.SQLSCRIPT_TEST:LIST_CONFIGURATIONS(</codeph><codeph>'[{"schema":"MY_SCHEMA","library":"SOME_PREFIX_*"},{"schema":"OTHER_SCHEMA","library":"*_SOME_SUFFIX"}]'</codeph><codeph>,
+                                    ?)</codeph></entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <p>Both will return the following tabular output.</p>
+            <table id="table_t15_kyv_vgb">
+                <tgroup cols="3">
+                    <colspec colnum="1" colname="col1"/>
+                    <colspec colnum="2" colname="col2"/>
+                    <colspec colnum="3" colname="col3"/>
+                    <thead>
+                        <row>
+                            <entry><b>Column name</b></entry>
+                            <entry><b>Type</b></entry>
+                            <entry><b>Description</b></entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry><b>SCHEMA_NAME</b></entry>
+                            <entry>NVARCHAR(256)</entry>
+                            <entry>Schema name</entry>
+                        </row>
+                        <row>
+                            <entry><b>LIBRARY_NAME</b></entry>
+                            <entry>NVARCHAR(256)</entry>
+                            <entry>Library name</entry>
+                        </row>
+                        <row>
+                            <entry><b>CONFIGURATION/TEST_NAME</b></entry>
+                            <entry>NVARCHAR(256)</entry>
+                            <entry>Configuration/Test name</entry>
+                        </row>
+                        <row>
+                            <entry><b>COMMENTS</b></entry>
+                            <entry>NCLOB</entry>
+                            <entry>Description</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </section>
+        <section id="section_db5_kyv_vgb">
+            <title>Matchers for End-User Tests</title>
+            <p>Within SQLSCRIPT TEST libraries, certain procedures of the built-in library
+                SYS.SQLSCRIPT_TEST can be used to verify results within End-User Tests.</p>
+            <p>Currently, there are several matchers for scalar variables, one matcher for table
+                variables and one that aborts the execution of the current test. The matchers for
+                scalar variables are as follows:</p>
+            <table id="table_eb5_kyv_vgb">
+                <tgroup cols="2">
+                    <colspec colnum="1" colname="col1"/>
+                    <colspec colnum="2" colname="col2"/>
+                    <thead>
+                        <row>
+                            <entry><u>Matcher Name</u></entry>
+                            <entry><u>Description</u></entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry><b>EXPECT_EQ</b></entry>
+                            <entry>checks that the inputs are equal</entry>
+                        </row>
+                        <row>
+                            <entry><b>EXPECT_NE</b></entry>
+                            <entry>checks that the inputs are not equal</entry>
+                        </row>
+                        <row>
+                            <entry><b>EXPECT_GE</b></entry>
+                            <entry>checks that the first input is greater than or equal to the
+                                second input</entry>
+                        </row>
+                        <row>
+                            <entry><b>EXPECT_GT</b></entry>
+                            <entry>checks that the first input is greater than the second
+                                input</entry>
+                        </row>
+                        <row>
+                            <entry><b>EXPECT_LE</b></entry>
+                            <entry>checks that the first input is less than or equal to the second
+                                input</entry>
+                        </row>
+                        <row>
+                            <entry><b>EXPECT_LT</b></entry>
+                            <entry>checks that the first input is less than the second input</entry>
+                        </row>
+                        <row>
+                            <entry><b>EXPECT_NULL</b></entry>
+                            <entry>checks that the input is null</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <p>All scalar matchers (except for EXPECT_NULL) take exactly two scalar input arguments.
+                The datatypes of these two inputs must be comparable in SQLScript. Most of the
+                datatypes can be categorized in three classes: String types, Numeric types and Date
+                types. While all types within the same class are comparable to each other, it is not
+                possible to compare date and numeric types. String types can be compared to every
+                other datatype but will be converted to the non-string type prior to the comparison.
+                Whenever two different datatypes are compared, at least one of the inputs will be
+                converted. When the conversion fails, it is considered a normal execution error
+                instead of reporting a matcher failure.</p>
+            <p>The table matcher (<b>EXPECT_TABLE_EQ</b>) however has three input arguments. Besides
+                two table variables that should be compared there is a third optional input, namely
+                IGNORE_ORDER. This parameter is TRUE by default and will compare the table variables
+                without considering the order of rows. For example row 2 of the first input might
+                match to row 5 of the second input. However, every row will be matched at most to
+                one row in the other table variable. The two input table variables must have an
+                equal number of columns and the columns must have same names. Furthermore, the
+                datatypes of the columns have to be comparable as well. If the types of the table
+                columns are different, one of the columns will be converted before the comparison.
+                Unlike for scalar comparisons, it will not lead to a runtime error if such a
+                conversion fails. Instead, the row will always be considered as mismatch. One
+                additional difference to scalar matchers is the handling of NULL values. For scalar
+                matchers, anything compared to NULL is false (even NULL). The table matcher however
+                considers NULL to be equal to NULL.</p>
+            <p>In case a matcher fails, a human-readable output will be added to the 'details'
+                output table of the built-in procedure SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA.
+                Furthermore, a call-stack will be generated for such a matcher failure to make it
+                possible to determine its exact code location. The table matcher will report a
+                maximum of 100 row mismatches for the sake of readability.</p>
+            <p>The built-in library SQLSCRIPT_TEST also contains a procedure named <b>FAIL</b>. This
+                procedure will (similar to a matcher) add an entry to the 'details' output table of
+                SYS.SQLSCRIPT_RUN_TESTS_ON_ORIGINAL_DATA whereby the error message that was provided
+                as input argument to the procedure FAIL will be contained as message. Afterwards,
+                this procedure will abort the execution of the current test. The subsequent tests
+                will still be executed.</p>
+        </section>
     </conbody>
 </concept>
