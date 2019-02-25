@@ -5,6 +5,180 @@
     <shortdesc></shortdesc>
     <conbody>
         <p><codeph>select i into a from mytab;</codeph></p>
+        <p/>
         <p><codeph>select i into a default 2 from mytab;</codeph></p>
+        <p/>
+        <table id="table_e2b_dnh_xgb">
+            <tgroup cols="3">
+                <colspec colnum="1" colname="col1"/>
+                <colspec colnum="2" colname="col2"/>
+                <colspec colnum="3" colname="col3"/>
+                <tbody>
+                    <row>
+                        <entry><b>Statement</b></entry>
+                        <entry><b>::ROWCOUNT (SPS03)</b></entry>
+                        <entry><b>::ROWCOUNT (SPS04)</b></entry>
+                    </row>
+                    <row>
+                        <entry>DML</entry>
+                        <entry>The number of updated rows</entry>
+                        <entry>The number of updated rows</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <p>SELECT statement</p>
+                            <p>
+                                <table id="table_h2b_dnh_xgb">
+                                    <tgroup cols="1">
+                                        <colspec colnum="1" colname="col1"/>
+                                        <tbody>
+                                            <row>
+                                                <entry>
+                                                  <p> </p>
+                                                  <p>select * from mytab;</p>
+                                                </entry>
+                                            </row>
+                                        </tbody>
+                                    </tgroup>
+                                </table>
+                            </p>
+                        </entry>
+                        <entry>N/A (retain previous value)</entry>
+                        <entry>The number of rows returned from the SELECT statement</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <p>Table variable statement with SELECT statement</p>
+                            <p>
+                                <table id="table_m2b_dnh_xgb">
+                                    <tgroup cols="1">
+                                        <colspec colnum="1" colname="col1"/>
+                                        <tbody>
+                                            <row>
+                                                <entry>
+                                                  <p> </p>
+                                                  <p>tv = select * from mytab;</p>
+                                                </entry>
+                                            </row>
+                                        </tbody>
+                                    </tgroup>
+                                </table>
+                            </p>
+                        </entry>
+                        <entry>N/A (retain previous value)</entry>
+                        <entry>The number of rows returned from the SELECT statement</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <p>SELECT INTO statement</p>
+                            <p>
+                                <table id="table_o2b_dnh_xgb">
+                                    <tgroup cols="1">
+                                        <colspec colnum="1" colname="col1"/>
+                                        <tbody>
+                                            <row>
+                                                <entry>
+                                                  <p> </p>
+                                                  <p>select i into a from mytab;</p>
+                                                </entry>
+                                            </row>
+                                        </tbody>
+                                    </tgroup>
+                                </table>
+                            </p>
+                        </entry>
+                        <entry>N/A (retain previous value)</entry>
+                        <entry>1 if the statement is executed successfully, retains the previous
+                            value otherwise.</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <p>SELECT INTO statement with default value</p>
+                            <p>
+                                <table id="table_afb_dnh_xgb">
+                                    <tgroup cols="1">
+                                        <colspec colnum="1" colname="col1"/>
+                                        <tbody>
+                                            <row>
+                                                <entry>
+                                                  <p> </p>
+                                                  <p>select i into a default 2 from mytab;</p>
+                                                </entry>
+                                            </row>
+                                        </tbody>
+                                    </tgroup>
+                                </table>
+                            </p>
+                        </entry>
+                        <entry>N/A (retain previous value)</entry>
+                        <entry>0 if the default values are assigned, 1 if the values are assigned
+                            from the SELECT statement, retains the previous value otherwise.</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <p>SELECT statement in dynamic SQL</p>
+                            <p>
+                                <table id="table_efb_dnh_xgb">
+                                    <tgroup cols="1">
+                                        <colspec colnum="1" colname="col1"/>
+                                        <tbody>
+                                            <row>
+                                                <entry>
+                                                  <p> </p>
+                                                  <p>exec 'select * from mytab';</p>
+                                                  <p>execute immediate 'select * from mytab';</p>
+                                                </entry>
+                                            </row>
+                                        </tbody>
+                                    </tgroup>
+                                </table>
+                            </p>
+                        </entry>
+                        <entry>0</entry>
+                        <entry>The number of rows from the SELECT statement</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <p>EXEC INTO with SELECT statement</p>
+                            <p>
+                                <codeblock>exec 'select i, j from mytab' into s1, s2;
+exec 'select * from mytab' into tv;</codeblock>
+                            </p>
+                        </entry>
+                        <entry>0</entry>
+                        <entry>
+                            <p>EXEC INTO with scalar variables works similar to SELECT INTO
+                                case.</p>
+                            <p>EXEC INTO with a table variable works similar to a table variable
+                                assign statement case.</p>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <p>Nested CALL statement</p>
+                            <p>
+                                <codeblock>call proc_nested;</codeblock>
+                            </p>
+                        </entry>
+                        <entry>N/A (retain previous value)</entry>
+                        <entry>The number of updated rows.</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <p>CREATE TABLE statement</p>
+                            <p>
+                                <codeblock>create table tab_a as (select * from mytab);</codeblock>
+                            </p>
+                        </entry>
+                        <entry>N/A (retains previous value)</entry>
+                        <entry>The number of updated rows</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <ul id="ul_qfb_dnh_xgb">
+            <li><b>Configuration</b></li>
+        </ul>
+        <p> </p>
     </conbody>
 </concept>
