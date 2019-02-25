@@ -24,18 +24,8 @@
                             <entry>
                                 <p>SELECT statement</p>
                                 <p>
-                                    <table id="table_uy5_45g_xgb">
-                                        <tgroup cols="1">
-                                            <colspec colnum="1" colname="col1"/>
-                                            <tbody>
-                                                <row>
-                                                  <entry><codeph>select</codeph>
-                                                  <codeph>* </codeph><codeph>from</codeph>
-                                                  <codeph>mytab;</codeph></entry>
-                                                </row>
-                                            </tbody>
-                                        </tgroup>
-                                    </table>
+                                    <codeblock>select * from mytab;
+</codeblock>
                                 </p>
                             </entry>
                             <entry>N/A (retain previous value)</entry>
