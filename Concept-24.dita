@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
 <concept id="concept_ph3_mmh_xgb">
-    <title></title>
+    <title>Rowcount</title>
     <shortdesc></shortdesc>
     <conbody>
-        <p></p>
+        <p><codeph>select i into a from mytab;</codeph></p>
+        <p><codeph>select i into a default 2 from mytab;</codeph></p>
     </conbody>
 </concept>
