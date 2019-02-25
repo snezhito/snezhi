@@ -4,8 +4,7 @@
     <title>Rowcount New</title>
     <shortdesc></shortdesc>
     <conbody>
-        <p>
-            <table id="table_ixf_j5g_xgb">
+        <p><table id="table_ny5_45g_xgb">
                 <tgroup cols="3">
                     <colspec colnum="1" colname="col1"/>
                     <colspec colnum="2" colname="col2"/>
@@ -25,7 +24,7 @@
                             <entry>
                                 <p>SELECT statement</p>
                                 <p>
-                                    <table id="table_lxf_j5g_xgb">
+                                    <table id="table_uy5_45g_xgb">
                                         <tgroup cols="1">
                                             <colspec colnum="1" colname="col1"/>
                                             <tbody>
@@ -46,7 +45,7 @@
                             <entry>
                                 <p>Table variable statement with SELECT statement</p>
                                 <p>
-                                    <table id="table_rxf_j5g_xgb">
+                                    <table id="table_cz5_45g_xgb">
                                         <tgroup cols="1">
                                             <colspec colnum="1" colname="col1"/>
                                             <tbody>
@@ -68,7 +67,7 @@
                             <entry>
                                 <p>SELECT INTO statement</p>
                                 <p>
-                                    <table id="table_uxf_j5g_xgb">
+                                    <table id="table_fz5_45g_xgb">
                                         <tgroup cols="1">
                                             <colspec colnum="1" colname="col1"/>
                                             <tbody>
@@ -91,7 +90,7 @@
                             <entry>
                                 <p>SELECT INTO statement with default value</p>
                                 <p>
-                                    <table id="table_byf_j5g_xgb">
+                                    <table id="table_hz5_45g_xgb">
                                         <tgroup cols="1">
                                             <colspec colnum="1" colname="col1"/>
                                             <tbody>
@@ -116,7 +115,7 @@
                             <entry>
                                 <p>SELECT statement in dynamic SQL</p>
                                 <p>
-                                    <table id="table_eyf_j5g_xgb">
+                                    <table id="table_oz5_45g_xgb">
                                         <tgroup cols="1">
                                             <colspec colnum="1" colname="col1"/>
                                             <tbody>
@@ -139,7 +138,7 @@
                             <entry>
                                 <p>EXEC INTO with SELECT statement</p>
                                 <p>
-                                    <table id="table_pyf_j5g_xgb">
+                                    <table id="table_uz5_45g_xgb">
                                         <tgroup cols="1">
                                             <colspec colnum="1" colname="col1"/>
                                             <tbody>
@@ -169,7 +168,7 @@
                             <entry>
                                 <p>Nested CALL statement</p>
                                 <p>
-                                    <table id="table_syf_j5g_xgb">
+                                    <table id="table_xz5_45g_xgb">
                                         <tgroup cols="1">
                                             <colspec colnum="1" colname="col1"/>
                                             <tbody>
@@ -188,7 +187,7 @@
                             <entry>
                                 <p>CREATE TABLE statement</p>
                                 <p>
-                                    <table id="table_bzf_j5g_xgb">
+                                    <table id="table_f1v_45g_xgb">
                                         <tgroup cols="1">
                                             <colspec colnum="1" colname="col1"/>
                                             <tbody>
@@ -210,7 +209,6 @@
                         </row>
                     </tbody>
                 </tgroup>
-            </table>
-        </p>
+            </table><b><b>Configuration</b></b></p>
     </conbody>
 </concept>
