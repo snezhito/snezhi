@@ -28,19 +28,7 @@
                         <entry>
                             <p>SELECT statement</p>
                             <p>
-                                <table id="table_h2b_dnh_xgb">
-                                    <tgroup cols="1">
-                                        <colspec colnum="1" colname="col1"/>
-                                        <tbody>
-                                            <row>
-                                                <entry>
-                                                  <p> </p>
-                                                  <p>select * from mytab;</p>
-                                                </entry>
-                                            </row>
-                                        </tbody>
-                                    </tgroup>
-                                </table>
+                                <codeblock>select * from mytab;</codeblock>
                             </p>
                         </entry>
                         <entry>N/A (retain previous value)</entry>
@@ -50,19 +38,7 @@
                         <entry>
                             <p>Table variable statement with SELECT statement</p>
                             <p>
-                                <table id="table_m2b_dnh_xgb">
-                                    <tgroup cols="1">
-                                        <colspec colnum="1" colname="col1"/>
-                                        <tbody>
-                                            <row>
-                                                <entry>
-                                                  <p> </p>
-                                                  <p>tv = select * from mytab;</p>
-                                                </entry>
-                                            </row>
-                                        </tbody>
-                                    </tgroup>
-                                </table>
+                                <codeblock>tv = select * from mytab;</codeblock>
                             </p>
                         </entry>
                         <entry>N/A (retain previous value)</entry>
@@ -72,19 +48,7 @@
                         <entry>
                             <p>SELECT INTO statement</p>
                             <p>
-                                <table id="table_o2b_dnh_xgb">
-                                    <tgroup cols="1">
-                                        <colspec colnum="1" colname="col1"/>
-                                        <tbody>
-                                            <row>
-                                                <entry>
-                                                  <p> </p>
-                                                  <p>select i into a from mytab;</p>
-                                                </entry>
-                                            </row>
-                                        </tbody>
-                                    </tgroup>
-                                </table>
+                                <codeblock>select i into a from mytab;</codeblock>
                             </p>
                         </entry>
                         <entry>N/A (retain previous value)</entry>
@@ -95,19 +59,7 @@
                         <entry>
                             <p>SELECT INTO statement with default value</p>
                             <p>
-                                <table id="table_afb_dnh_xgb">
-                                    <tgroup cols="1">
-                                        <colspec colnum="1" colname="col1"/>
-                                        <tbody>
-                                            <row>
-                                                <entry>
-                                                  <p> </p>
-                                                  <p>select i into a default 2 from mytab;</p>
-                                                </entry>
-                                            </row>
-                                        </tbody>
-                                    </tgroup>
-                                </table>
+                                <codeblock>select i into a default 2 from mytab;</codeblock>
                             </p>
                         </entry>
                         <entry>N/A (retain previous value)</entry>
