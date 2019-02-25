@@ -118,20 +118,8 @@
                         <entry>
                             <p>SELECT statement in dynamic SQL</p>
                             <p>
-                                <table id="table_efb_dnh_xgb">
-                                    <tgroup cols="1">
-                                        <colspec colnum="1" colname="col1"/>
-                                        <tbody>
-                                            <row>
-                                                <entry>
-                                                  <p> </p>
-                                                  <p>exec 'select * from mytab';</p>
-                                                  <p>execute immediate 'select * from mytab';</p>
-                                                </entry>
-                                            </row>
-                                        </tbody>
-                                    </tgroup>
-                                </table>
+                                <codeblock>exec 'select * from mytab';
+execute immediate 'select * from mytab';</codeblock>
                             </p>
                         </entry>
                         <entry>0</entry>
