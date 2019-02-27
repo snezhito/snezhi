@@ -4,6 +4,125 @@
     <title></title>
     <shortdesc></shortdesc>
     <conbody>
-        <p></p>
+        <p>
+            <table id="table_efp_jsv_xgb">
+                <tgroup cols="5">
+                    <colspec colnum="1" colname="col1"/>
+                    <colspec colnum="2" colname="col2"/>
+                    <colspec colnum="3" colname="col3"/>
+                    <colspec colnum="4" colname="col4"/>
+                    <colspec colnum="5" colname="col5"/>
+                    <tbody>
+                        <row>
+                            <entry>OPERATOR</entry>
+                            <entry>OPERATOR_STRING</entry>
+                            <entry>OPERATOR_DETAILS</entry>
+                            <entry>USED_MEMORY_SELF</entry>
+                            <entry>USED_MEMORY_CUMULATIVE</entry>
+                        </row>
+                        <row>
+                            <entry><b>Do</b></entry>
+                            <entry/>
+                            <entry/>
+                            <entry>-1</entry>
+                            <entry>4084734</entry>
+                        </row>
+                        <row>
+                            <entry><b> Execute SePlan</b></entry>
+                            <entry/>
+                            <entry/>
+                            <entry>-1</entry>
+                            <entry>4084734</entry>
+                        </row>
+                        <row>
+                            <entry><b> Sequential Op</b></entry>
+                            <entry/>
+                            <entry/>
+                            <entry>-1</entry>
+                            <entry>4084734</entry>
+                        </row>
+                        <row>
+                            <entry><b> Initial Op</b></entry>
+                            <entry/>
+                            <entry/>
+                            <entry>-1</entry>
+                            <entry>-1</entry>
+                        </row>
+                        <row>
+                            <entry><b> Parallel Op</b></entry>
+                            <entry/>
+                            <entry/>
+                            <entry>-1</entry>
+                            <entry>4084734</entry>
+                        </row>
+                        <row>
+                            <entry><b> Parallel Evaluation</b></entry>
+                            <entry/>
+                            <entry/>
+                            <entry>-1</entry>
+                            <entry>4084734 (&lt;a> + &lt;b> + &lt;c> + &lt;d> + &lt;e>)</entry>
+                        </row>
+                        <row>
+                            <entry><b> Table Assign Op</b></entry>
+                            <entry>select * from big_table with hint(no_inline)</entry>
+                            <entry/>
+                            <entry>-1</entry>
+                            <entry>4035899</entry>
+                        </row>
+                        <row>
+                            <entry><b> Execute SQL Statement</b></entry>
+                            <entry/>
+                            <entry> ..., statement execution memory: &lt;a>, itab size:
+                                &lt;b></entry>
+                            <entry>4035899 (&lt;a> + &lt;b>)</entry>
+                            <entry>4035899</entry>
+                        </row>
+                        <row>
+                            <entry><b> Table Assign Op</b></entry>
+                            <entry>select * from small_table with hint(no_inline)</entry>
+                            <entry/>
+                            <entry>-1</entry>
+                            <entry>16067</entry>
+                        </row>
+                        <row>
+                            <entry><b> Execute SQL Statement</b></entry>
+                            <entry/>
+                            <entry> ..., statement execution memory: &lt;c>, itab size:
+                                &lt;d></entry>
+                            <entry>16067 (&lt;c> + &lt;d>)</entry>
+                            <entry>16067</entry>
+                        </row>
+                        <row>
+                            <entry><b> Select Op</b></entry>
+                            <entry>select * from $$_SS_SE_TAB_VAR_V1_2$$ "V1" union all ...</entry>
+                            <entry/>
+                            <entry>-1</entry>
+                            <entry>32768</entry>
+                        </row>
+                        <row>
+                            <entry><b> Execute SQL Statement</b></entry>
+                            <entry/>
+                            <entry> ..., statement execution memory: &lt;e></entry>
+                            <entry>32768 (&lt;e>)</entry>
+                            <entry>32768</entry>
+                        </row>
+                        <row>
+                            <entry><b> Flow Control Op</b></entry>
+                            <entry/>
+                            <entry/>
+                            <entry>-1</entry>
+                            <entry>-1</entry>
+                        </row>
+                        <row>
+                            <entry><b> Terminal Op</b></entry>
+                            <entry/>
+                            <entry/>
+                            <entry>-1</entry>
+                            <entry>-1</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </p>
     </conbody>
 </concept>
