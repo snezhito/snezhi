@@ -4,6 +4,32 @@
     <title></title>
     <shortdesc></shortdesc>
     <conbody>
-        <p></p>
+        <div><p>SQLScript now supports transactional savepoints, that allow the rollback of a
+                transaction to a defined point. This includes:</p><ul id="ul_u1s_xcw_xgb">
+                <li>the definition of a Savepoint: SAVEPOINT &lt;name></li>
+                <li>the rollback to a specific Savepoint: ROLLBACK TO SAVEPOINT &lt;name></li>
+                <li>
+                    <p>and to release a Savepoint again: RELEASE SAVEPOINT &lt;name></p>
+                </li>
+            </ul><b>Limitation</b><p>SAVEPOINT is a transactional statement, such as COMMIT or
+                ROLLBACK. Therefore, the limitations of transactional statements applies to
+                SAVEPOINT as
+            well.</p><b>Examples</b><codeblock>drop table t1;
+create table t1( i1 int );
+ 
+create or replace procedure test
+as begin
+    insert into t1 values(1);
+ 
+    SAVEPOINT save1;
+    insert into t1 values(2);
+ 
+    ROLLBACK TO SAVEPOINT save1;
+    select * from t1;
+    RELEASE SAVEPOINT save1;
+end;
+ 
+call test; -- result: {1}
+select * from t1; -- result: {1}</codeblock></div>
     </conbody>
 </concept>
