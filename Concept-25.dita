@@ -34,13 +34,14 @@ DECLARE lt2 TABLE (a INT, b INT, c INT NOT NULL, PRIMARY KEY(a, b));
 
 </codeblock></p>
         </section>
-        <section id="section_rtl_nlg_zgb"><title><b>Compatibility with other
-                statements</b></title><p> orimplementation  it is not possible to combine DML
-                statements with other table variable related statements for the same table variable.
-                If a table variable is manipulated by a DML statement, it can only be used in SQL
-                statements - this includes queries and sub-calls if the variable is bound to an
-                input parameter. Moreover, it cannot be the target of any assign statement and
-                therefore cannot be bound to an output parameter of a
+        <section id="section_rtl_nlg_zgb">
+            <title><b>Compatibility with other statements</b></title>
+            <p> For implementation reasons,it is not possible to combine DML statements with other
+                table -ariable related statements for the same table variable. If a table variable
+                is manipulated by a DML statement, it can only be used in SQL statements - this
+                includes queries and sub-calls if the variable is bound to an input parameter.
+                Moreover, it cannot be the target of any assign statement and therefore cannot be
+                bound to an output parameter of a
                 sub-call.<codeblock>DECLARE lt1 TABLE(a int);
 DECLARE lt2 TABLE LIKE :lt1;
 INSERT INTO :lt1 VALUES(1);
@@ -48,8 +49,13 @@ INSERT INTO :lt2 (SELECT * FROM :lt1); -- supported
 SELECT * FROM :lt2; -- supported
 CALL nested_proc(:lt2); -- supported only if the procedure parameter is IN
 :lt1.INSERT(:lt2); -- not supported (INSERT operator)
-lt2 = SELECT * FROM :lt1; -- not supported (assignment target)</codeblock></p><b>Example</b></section>
+lt2 = SELECT * FROM :lt1; -- not supported (assignment target)</codeblock></p>
+        </section>
         <section id="section_hvw_mlg_zgb">
+            <title><b>Conversion</b></title>
+            <p/>
+        </section>
+        <section id="section_f52_zmg_zgb">
             <title/>
             <p/>
         </section>
