@@ -13,5 +13,21 @@
         </ul>
         <p>The syntax of the statements is identical with that for manipulating prsistent tables.
             The only difference is that you must mark the variables by using a colon.</p>
+        <codeblock>DECLARE lt TABLE (a INT, b VARCHAR(20));
+INSERT INTO :lt VALUES (1, 'abc');
+UPDATE :lt SET b = 'def' WHERE a = 1;
+DELETE FROM :lt WHERE a = 1;</codeblock>
+        <section id="section_vx5_nlg_zgb">
+            <title>Constraints</title>
+            <p/>
+        </section>
+        <section id="section_rtl_nlg_zgb">
+            <title/>
+            <p/>
+        </section>
+        <section id="section_hvw_mlg_zgb">
+            <title/>
+            <p/>
+        </section>
     </conbody>
 </concept>
