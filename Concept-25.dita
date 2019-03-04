@@ -53,7 +53,24 @@ lt2 = SELECT * FROM :lt1; -- not supported (assignment target)</codeblock></p>
         </section>
         <section id="section_hvw_mlg_zgb">
             <title><b>Conversion</b></title>
-            <p/>
+            <p>If you need to combine DML statements with other types of statements for one data
+                set, you have to use multiple table variables. You can convert data between a
+                variable used in a DML statement and a variable not used in a DML statement in both
+                directions.</p>
+            <p>Example which demonstrates the conversion in both
+                directions:<codeblock>
+DECLARE tab_without_dml TABLE (a INT);
+DECLARE tab_with_dml TABLE LIKE :lt1;
+--
+tab_without_dml = SELECT * FROM mytab;
+--
+-- execute non-DML statements with tab_without_dml ...
+--
+INSERT INTO :tab_with_dml (SELECT * FROM :tab_without_dml); -- convert variable without DML to variable with DML
+--
+-- execute DML statements with tab_with_dml ...
+--
+tab_without_dml = SELECT * FROM :tab_with_dml; -- convert variable with DML to variable without DML</codeblock></p>
         </section>
         <section id="section_f52_zmg_zgb">
             <title/>
