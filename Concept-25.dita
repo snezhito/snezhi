@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
 <concept id="concept_x3j_nkg_zgb">
-    <title></title>
+    <title>SQL DML</title>
     <shortdesc></shortdesc>
     <conbody>
-        <p></p>
+        <p>You can modify data in SQLScript table variables with SQL DML statements. The following
+            statements are supported:</p>
+        <ul id="ul_mq2_pkg_zgb">
+            <li>INSERT</li>
+            <li>UPDATE</li>
+            <li>DELETE </li>
+        </ul>
+        <p>The syntax of the statements is ideniimaath the sy taforan  anipulaaingfeatrsistent
+            tables. The only difference is that you must mark the variables by using a colon.</p>
     </conbody>
 </concept>
