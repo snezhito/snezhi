@@ -35,12 +35,12 @@ DECLARE lt2 TABLE (a INT, b INT, c INT NOT NULL, PRIMARY KEY(a, b));
 </codeblock></p>
         </section>
         <section id="section_rtl_nlg_zgb"><title><b>Compatibility with other
-                statements</b></title><p>Due to implementation details, it is not possible to
-                combine DML statements with other table variable related statements for the same
-                table variable. If a table variable is manipulated by a DML statement, it can only
-                be used in SQL statements - this includes queries and sub-calls if the variable is
-                bound to an input parameter. Moreover, it cannot be the target of any assign
-                statement and therefore cannot be bound to an output parameter of a
+                statements</b></title><p> orimplementation  it is not possible to combine DML
+                statements with other table variable related statements for the same table variable.
+                If a table variable is manipulated by a DML statement, it can only be used in SQL
+                statements - this includes queries and sub-calls if the variable is bound to an
+                input parameter. Moreover, it cannot be the target of any assign statement and
+                therefore cannot be bound to an output parameter of a
                 sub-call.<codeblock>DECLARE lt1 TABLE(a int);
 DECLARE lt2 TABLE LIKE :lt1;
 INSERT INTO :lt1 VALUES(1);
