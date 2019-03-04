@@ -93,5 +93,12 @@ tab_without_dml = SELECT * FROM :tab_with_dml; -- convert variable with DML to v
             <note>The primary key check can also be accomplished by using sorted table
                 variables.</note>
         </section>
+        <section id="section_hyt_tvg_zgb">
+            <title>Limitations</title>
+            <p>DML statements on table variables cannot be used in autonomous transactions and
+                parallel execution blocks. </p>
+            <p>Neither input, nor output procedure or function parameters can be manipulated with
+                DML statements.</p>
+        </section>
     </conbody>
 </concept>
