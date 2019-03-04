@@ -77,8 +77,21 @@ tab_without_dml = SELECT * FROM :tab_with_dml; -- convert variable with DML to v
                 </note></p>
         </section>
         <section id="section_f52_zmg_zgb">
-            <title/>
-            <p/>
+            <title>Use Cases</title>
+            <p>You can use DML statements if your scenario is relying mainly on SQL statements,
+                especially if you need to utilize a complex SQL logic for manipulation of your data,
+                like the following:</p>
+            <ul id="ul_ofm_fvg_zgb">
+                <li>Complex WHERE conditions for UPDATE or DELETE</li>
+                <li>Complex UPDATE statements</li>
+                <li>Constraint checks</li>
+            </ul>
+            <p>In other cases, it is recommended to use the SQLScript table variable operators for
+                manipulation of table variable data because they offer a better performance, can be
+                combined with other table variable relevant statements and do not imply any
+                restriction with regards to procedure or function parameter handling.</p>
+            <note>The primary key check can also be accomplished by using sorted table
+                variables.</note>
         </section>
     </conbody>
 </concept>
