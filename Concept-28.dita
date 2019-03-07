@@ -4,6 +4,15 @@
     <title></title>
     <shortdesc></shortdesc>
     <conbody>
-        <p></p>
+        <p>You can create procedures and functions with array parameters so that array variables or
+            constant arrays can be passed to them. Tho flowing scenarios are supported:</p>
+        <ul id="ul_ss5_4y2_1hb">
+            <li>Array input/output/inout parameter for procedures</li>
+            <li>Array input parameter for SUDF/TUDF</li>
+            <li>Array return type for SUDF</li>
+            <li>Array parameter for library procedures/functions</li>
+            <li>Array input parameter for anonymous block/embedded SQL function</li>
+            <li>Array variables in DML/Queries</li>
+        </ul>
     </conbody>
 </concept>
