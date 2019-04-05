@@ -4,6 +4,42 @@
     <title></title>
     <shortdesc></shortdesc>
     <conbody>
-        <p></p>
+        <section id="section_m54_132_3hb">
+            <title><ph id="_Toc529782869">About Project Socrates</ph></title>
+            <p>Users want to communicate with apps in a human-like way and receive personalized
+                assistance. This interaction paradigm is called “conversational UI”. It is a key
+                part of SAP's product strategy and a key UA strategy topic.</p>
+            <p>Chatbots help users perform their tasks more quickly and in a natural way. They
+                respond to user questions or commands. The user experience is about engaging in a
+                fluid, human-like dialog with the user (voice recognition and/or text).</p>
+            <p>The SAP Help Portal is a goldmine for chatbots, with structured content helping SAP
+                make its chatbots smarter and more personalized.</p>
+            <p>Colleagues in UA are language and communication specialists who understand the
+                context of users, their intents and expectations, and how they use language. With
+                the right infrastructure, technology, and enablement, they can ensure that SAP
+                chatbots converse naturally and easily with users and create a frictionless
+                conversational experience.</p>
+            <p>Project Socrates started in April 2018, with wave 1 running until January 2019 and
+                wave 2 running till end 2019. The purpose of Project Socrates is to enable the SAP
+                UA and translation organizations to become the go-to experts for conversational
+                design of SAP chatbots in the intelligent enterprise.</p>
+        </section>
+        <section id="section_o54_132_3hb">
+            <title><ph id="_Toc529782870">Mission Statement</ph></title>
+            <p>The Project Socrates team ensures UA and Translation have the right infrastructure,
+                technology, content, guidelines, and training to support SAP’s vision of an
+                intelligent enterprise. </p>
+        </section>
+        <section id="section_s54_132_3hb">
+            <title><ph id="_Toc529782871">Project Setup</ph></title>
+            <p>The project is staffed with UA, Translation, Development, and UX colleagues from
+                across SAP products and locations. The project is divided into separate work
+                packages, a cross-work package group for multilingual aspects, and a group of
+                consulting advisers from various areas within SAP. For more details on Project
+                Socrates, see: Get Project News on Chatbots@UA Jam Group <xref
+                    href="https://jam4.sapjam.com/groups/HVprp1Pkb1GPUw7E4c4TXi/overview_page/iCfuEYZ1hYZdTG7SgieCgT"
+                    format="html" scope="external"
+                    >https://jam4.sapjam.com/groups/HVprp1Pkb1GPUw7E4c4TXi/overview_page/iCfuEYZ1hYZdTG7SgieCgT</xref>.</p>
+        </section>
     </conbody>
 </concept>
