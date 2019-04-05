@@ -1,9 +1,151 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
 <concept id="concept_hmj_x32_3hb">
-    <title></title>
-    <shortdesc></shortdesc>
-    <conbody>
-        <p></p>
-    </conbody>
+    <title>Chatbots and Security</title>
+    <shortdesc>
+        <section id="section_zbd_y32_3hb">
+            <title><ph id="_Toc5112605">Overview</ph></title>
+            <p>Chatbots need data to do their job, and they may handle very sensitive data, such as
+                credit/debit cards, SSN, bank accounts and other sensitive personally identifiable
+                information (PII). This makes chatbots an attractive target to be exploited by an
+                attacker to steal users’ information. For this reason, is very important to know the
+                security practices that are implemented at SAP when working with chatbots. For the
+                most part, chatbots don’t present security issues that haven’t already been
+                discovered and properly mitigated. Being aware of the security practices not only
+                helps you to ensure that your chatbot is secure but also gives you peace of mind
+                that your chatbot will not be at risk.</p>
+        </section>
+        <section id="section_acd_y32_3hb">
+            <title><ph id="_Toc5112606">Types of security concerns</ph></title>
+            <p>Security concerns fall into two main categories:</p>
+            <p>· Threats</p>
+            <ul id="ul_bcd_y32_3hb">
+                <li>These are usually defined as ways that a system can be compromised. Threats can
+                    include events such as Spoofing, Tampering, Repudiation, Information Disclosure,
+                    Denial of Service, Elevation of Privileges and many more. After an attack,
+                    hackers can threaten to expose information or sell personal information on the
+                    deep web. Each different attack should be mitigated with their respective
+                    techniques.</li>
+            </ul>
+            <p>· Vulnerabilities</p>
+            <ul id="ul_ccd_y32_3hb">
+                <li>Vulnerabilities are defined as ways that a system can be compromised that are
+                    not properly mitigated. A system can become vulnerable and open to attacks when
+                    it is not well maintained, has poor coding, lacks protection, or due to human
+                    errors. The most effective way to mitigate vulnerabilities is to implement SDL
+                    (Security Development Lifecycle) activities into the development lifecycle.</li>
+            </ul>
+            <p><xref
+                    href="https://social.technet.microsoft.com/wiki/contents/articles/7100.the-security-development-lifecycle.aspx"
+                    format="html" scope="external"/></p>
+            <p>Chatbots can offer a solution to some of the well-known security weaknesses.
+                Encryption and other security measures minimize the vulnerability of a system
+                through highly secure protocols. As a result, chatbots provide security to some
+                vulnerabilities.</p>
+        </section>
+        <section id="section_gcd_y32_3hb">
+            <title><ph id="_Toc5112607">Some security practices implemented when working with a
+                    chatbot</ph></title>
+            <p>· End-to-end encryption</p>
+            <p> It is very important to have end-to-end encryption, this ensures that the whole
+                conversation will be encrypted. Data in transit can also be tampered and spoofed,
+                different protocols exist to provide encryption while addressing these issues.
+                Encryption in some cases might need to be used with authentication and integrity
+                protection schemes.</p>
+            <p> Chatbots can also connect to channels like Facebook messenger, Slack, and so on. In
+                this case, the ideal mitigation for end-to-end encryption is to only allow chatbots
+                to connect to channels that support data encryption. Article 32 (a) of the General
+                Data Protection Regulation (GDPR) specifically requires that companies take measures
+                to pseudonymize and encrypt personal data. </p>
+            <p>· User identity authentication and authorization</p>
+            <p> User authentication is used to identify that a user is verified with valid and
+                secure login credentials such as a username and password. The credentials are
+                exchanged for a secure authentication token, this token is used throughout the
+                user’s session.</p>
+            <p> One of the security measures used in chatbots especially on the banking cases is
+                authentication timeouts, when the generated token can only be used for a preset
+                amount of time, after that, the system will be forced to make a new one.</p>
+            <p> Two-factor authentication is another way to verify the identity of a user by asking
+                them to verify their account through an email and text message, this authentication
+                technique also helps with authorization by granting the right person access and
+                keeping the information in the right hands.</p>
+            <p>· Self-destructive messages</p>
+            <p> When sensitive PII is transmitted, the message containing this information is
+                destroyed after a set amount of time. This type of security measure is crucial when
+                working with banking and other financial chatbots. Article 5 (e) of the General Data
+                Protection Regulation (GDPR) states that personal data shall be kept for no longer
+                than is necessary for the purposes for which it is being processed. Another GDPR
+                compliance measure is to have an “intent level” of privacy, the user can exchange
+                personal information but the data will not be revealed even from the backend, only
+                the intents from the user are logged and kept for audit purposes.</p>
+            <p>· Secure protocols</p>
+            <p> The purpose of secure protocols is to transfer data from point A to point B without
+                being intercepted, read by unauthorized individuals, altered or deleted. HTTPS is
+                the web protocol ensuring the privacy and integrity of our data, this protocol
+                transfers data over Hypertext transfer protocol (HTTP) through an encrypted
+                connection by Secure Sockets Layer (SSL) or Transport Layer Security (TSL).</p>
+            <p>Source: <xref
+                    href="https://cai.tools.sap/blog/chatbots-security-measures-you-need-to-consider/"
+                    format="html" scope="external"
+                    >https://cai.tools.sap/blog/chatbots-security-measures-you-need-to-consider/</xref>
+                (retrieved 18.02.2019)</p>
+        </section>
+        <section id="section_icd_y32_3hb">
+            <title><ph id="_Toc5112608">Security and SAP CoPilot</ph></title>
+            <p>SAP CoPilot stores personal information (such as first name, last name, email
+                address, user ID, backend user ID) from the identity management for performance
+                reasons. This interface can be used to offboard a user from SAP CoPilot.</p>
+            <p>Offboarding a user includes:</p>
+            <ul id="ul_pcd_y32_3hb">
+                <li>· Deletion of private chats by the user (non-shared chats).</li>
+                <li>· The deletion of shared chats where the user is the last person to be
+                    offboarded.</li>
+                <li>· Changing ownership of shared chats to the most active participant or to
+                    another participant if none are active.</li>
+                <li>· Displaying a system message regarding the new ownership of the shared
+                    chats.</li>
+                <li>· Deletion of personal information (such as user name, email address, user ID,
+                    and backend user ID). The user name still exists in system messages for shared
+                    chats. The user ID might still be stored in the security logs or configuration
+                    change logs as indicated in the required retention period, for audit purposes.
+                </li>
+            </ul>
+            <p> </p>
+            <p>For more details on security and data protection at SAP, see:</p>
+            <ul id="ul_qcd_y32_3hb">
+                <li>· SAP <xref
+                        href="https://wiki.wdf.sap.corp/wiki/pages/viewpage.action?pageId=1711447344"
+                        format="html" scope="external">Data Protection Management System
+                        (DPMS)</xref>: <xref
+                        href="https://wiki.wdf.sap.corp/wiki/pages/viewpage.action?pageId=1711447344"
+                        format="html" scope="external"
+                        >https://wiki.wdf.sap.corp/wiki/pages/viewpage.action?pageId=1711447344</xref>
+                </li>
+                <li>· SAP Data Protection and Privacy Policy, Standards and Guidelines: <xref
+                        href="https://wiki.wdf.sap.corp/wiki/pages/viewpage.action?pageId=1722358433"
+                        format="html" scope="external"
+                        >https://wiki.wdf.sap.corp/wiki/pages/viewpage.action?pageId=1722358433</xref>
+                </li>
+                <li>· SAP Data Protection and Privacy Network: <xref
+                        href="https://jam4.sapjam.com/groups/EQ0719U3m54HB0rrQbVAxK/overview_page/AV69Be8xuMcIVOAfNQKlTe"
+                        format="html" scope="external"
+                        >https://jam4.sapjam.com/groups/EQ0719U3m54HB0rrQbVAxK/overview_page/AV69Be8xuMcIVOAfNQKlTe</xref>
+                </li>
+                <li>· SAP Personal Data and GDPR: <xref
+                        href="https://wiki.wdf.sap.corp/wiki/display/DPPO/Personal+Data"
+                        format="html" scope="external"
+                        >https://wiki.wdf.sap.corp/wiki/display/DPPO/Personal+Data</xref> : </li>
+                <li>SAP Global Security/SAP Security Strategy: <xref
+                        href="https://portal.wdf.sap.corp/irj/go/km/docs/corporate_portal/Cross%20Services%20for%20SAP/Security/Security%20at%20SAP/2018_Global_Security_SAP_Strategy_V4.pdf"
+                        format="html" scope="external"
+                        >https://portal.wdf.sap.corp/irj/go/km/docs/corporate_portal/Cross%20Services%20for%20SAP/Security/Security%20at%20SAP/2018_Global_Security_SAP_Strategy_V4.pdf</xref></li>
+                <li>SAP Product Standard Security Version 7.0: <xref
+                        href="https://wiki.wdf.sap.corp/wiki/display/PSSEC/Security+Requirements+History?preview=/753271897/1980192109/SAP%20Product%20Standard%20Security%20Version%2070.pdf"
+                        format="html" scope="external"
+                        >https://wiki.wdf.sap.corp/wiki/display/PSSEC/Security+Requirements+History?preview=/753271897/1980192109/SAP%20Product%20Standard%20Security%20Version%2070.pdf</xref></li>
+            </ul>
+            <p> </p>
+        </section>
+    </shortdesc>
+    <conbody/>
 </concept>
